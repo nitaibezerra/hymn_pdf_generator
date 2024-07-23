@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "hymn_pdf_generator"
 version = "0.1.0"
-description = " library to generate Santo Daime Hymn books with formatting opitions"
+description = "A library to generate Santo Daime Hymn books with formatting opitions"
 authors = ["Nitai Bezerra da Silva <nitaibezerra@protonmail.com>"]
 
 [tool.poetry.dependencies]
