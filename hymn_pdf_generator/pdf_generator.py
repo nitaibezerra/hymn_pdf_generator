@@ -120,22 +120,12 @@ class HymnPDFGenerator(Configuration):
             spaceAfter=0.12 * inch
         )
 
-        self.hymn_style_style = ParagraphStyle(
+        self.hymn_offered_to_and_style_style = ParagraphStyle(
             'RightAlignStyle',
             parent=self.styles['Normal'],
             fontName=self.font_name,
             fontSize=12,
             alignment=2,  # Right align
-            leading=0,
-            spaceAfter=22
-        )
-
-        self.hymn_offered_to_style = ParagraphStyle(
-            'LeftAlignStyle',
-            parent=self.styles['Normal'],
-            fontName=self.font_name,
-            fontSize=12,
-            alignment=0,  # Left align
             leading=0,
             spaceAfter=22
         )
@@ -226,14 +216,23 @@ class HymnPDFGenerator(Configuration):
         :param hymn: The hymn instance.
         :return: A list of elements for the offered_to and style.
         """
-        elements = []
         offered_style = []
         if hymn.offered_to:
             offered_style.append(f'Ofertado a {hymn.offered_to}')
         if hymn.style:
             offered_style.append(hymn.style)
-        elements.append(Paragraph(' - '.join(offered_style), self.hymn_style_style))
-        return elements
+
+        style = self.hymn_offered_to_and_style_style
+        resize_factor = hymn.adjusted_font_size / self.default_body_font_size
+        adjusted_style = ParagraphStyle(
+            name=style.name,
+            parent=style,
+            fontName=self.font_name,
+            spaceAfter=style.spaceAfter * resize_factor,
+        )
+        return [
+            Paragraph(' - '.join(offered_style), adjusted_style)
+        ]
 
     def _build_body_paragraphs(self, hymn: Hymn) -> List[Paragraph]:
         """
