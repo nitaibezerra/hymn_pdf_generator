@@ -2,7 +2,6 @@ from dataclasses import dataclass, field
 from typing import List, Optional
 
 import yaml
-from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import inch
 from reportlab.pdfbase.pdfmetrics import stringWidth
@@ -12,7 +11,6 @@ from reportlab.platypus import (
     PageBreak,
     Paragraph,
     SimpleDocTemplate,
-    Spacer,
 )
 from reportlab.platypus.flowables import HRFlowable
 
@@ -61,7 +59,7 @@ class Hymn(Configuration, MetaHymn):
         """
         font_size = self.default_body_font_size
         max_width = self.pagesize[0] - 2 * self.margin
-        max_width -= 16  # Adjust for the leading
+        max_width -= 14  # Adjust for the leading
 
         for line in self.text.split("\n"):
             while stringWidth(line, self.font_name, font_size) > max_width and font_size > 6:
@@ -179,10 +177,12 @@ class HymnPDFGenerator(Configuration):
         allocator = LevelAllocator()
         line_positions = allocator.get_entries_with_levels(hymn.repetitions)
 
-        base_y_start = -12
-        one_line_height = 7
-        space_between_lines = 9
-        levels_distance = 6
+        resize_factor = hymn.adjusted_font_size / self.default_body_font_size
+
+        base_y_start = -8 + (-4 * resize_factor)
+        one_line_height = 7 * resize_factor
+        space_between_lines = 9 * resize_factor
+        levels_distance = 6 * resize_factor
 
         for line in line_positions:
             start_line = line['start'] - 1
@@ -244,14 +244,14 @@ class HymnPDFGenerator(Configuration):
         """
         elements = []
         paragraphs = hymn.text.strip().split("\n\n")
-        adjusted_font_size = hymn.adjusted_font_size
+        font_size = hymn.adjusted_font_size
 
         adjusted_style = ParagraphStyle(
             name=self.body_style.name,
             parent=self.body_style,
             fontName=self.font_name,
-            fontSize=adjusted_font_size,
-            leading=adjusted_font_size + 2
+            fontSize=font_size,
+            leading=font_size + 2
         )
 
         for paragraph in paragraphs:
