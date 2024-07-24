@@ -369,7 +369,7 @@ hymns:
       Escudos da luz
       São estes
       Que estão prontos para lutar
-    repetitions: "1-4, 5-7"
+    repetitions: "1-4,  -7"
     received_at: 2020-12-19
 
   - number: 13
@@ -462,7 +462,8 @@ hymns:
   - number: 20
     title: "Fogueira"
     text: |
-      Imaginem o alarde, meus irmãos, cantando
+      Imaginem o alarde
+      meus irmãos cantando
       Abrindo os caminhos
 
       Uma estrela de luz
@@ -476,7 +477,7 @@ hymns:
       Pousou no meu peito
       Me trouxe meu pai
       Numa paz de algum dia
-    repetitions: "1-3"
+    repetitions: "1-3, 4-6"
     received_at: 2021-09-13
 
   - number: 21
