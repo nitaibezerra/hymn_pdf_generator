@@ -2,17 +2,13 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 import yaml
+from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import inch
 from reportlab.pdfbase.pdfmetrics import stringWidth
-from reportlab.platypus import (
-    Flowable,
-    HRFlowable,
-    PageBreak,
-    Paragraph,
-    SimpleDocTemplate,
-    Spacer,
-)
+from reportlab.platypus import (Flowable, HRFlowable, PageBreak, Paragraph,
+                                SimpleDocTemplate, Spacer)
+from reportlab.platypus.flowables import HRFlowable
 
 from hymn_pdf_generator.repetition_bar_allocator import LevelAllocator
 
@@ -28,6 +24,7 @@ class Hymn:
     title: str
     style: Optional[str]
     offered_to: Optional[str]
+    extra_instructions: Optional[str]
     text: str
     repetitions: Optional[str]
     received_at: Optional[str]
@@ -55,7 +52,7 @@ class HymnPDFGenerator:
         """
         Initialize the HymnPDFGenerator with a hymn and output filename.
 
-        :param hymn: An instance of the Hymn data class.
+        :param hymns: A list of Hymn instances.
         :param filename: The output PDF filename.
         """
         self.hymns = hymns
@@ -163,7 +160,8 @@ class HymnPDFGenerator:
 
     def _adjust_font_size(self, text: str, style: ParagraphStyle) -> ParagraphStyle:
         """
-        Adjust the font size of the paragraph style to fit the text within the given width.
+        Adjust the font size of the paragraph style to fit the text
+        within the given width.
 
         :param text: The text to measure.
         :param style: The initial paragraph style.
@@ -188,6 +186,62 @@ class HymnPDFGenerator:
         )
         return new_style
 
+    def _build_title_and_header(self, idx: int, hymn: Hymn) -> List[Paragraph]:
+        """
+        Build the title and header elements for a hymn.
+
+        :param idx: The index of the hymn.
+        :param hymn: The hymn instance.
+        :return: A list of elements for the title and header.
+        """
+        elements = []
+        title = f"{idx:02d}. {hymn.title} ({hymn.number:02d})"
+        elements.append(Paragraph(title, self.title_style))
+        elements.append(HRFlowable(width="100%", thickness=1, color="black", spaceAfter=0))
+        return elements
+
+    def _build_offered_to_and_style(self, hymn: Hymn) -> List[Paragraph]:
+        """
+        Build the elements for the hymn offered_to and style.
+
+        :param hymn: The hymn instance.
+        :return: A list of elements for the offered_to and style.
+        """
+        elements = []
+        offered_style = []
+        if hymn.offered_to:
+            offered_style.append(f'Ofertado a {hymn.offered_to}')
+        if hymn.style:
+            offered_style.append(hymn.style)
+        elements.append(Paragraph(' - '.join(offered_style), self.hymn_style_style))
+        return elements
+
+    def _build_body_paragraphs(self, hymn: Hymn) -> List[Paragraph]:
+        """
+        Build the body paragraphs for a hymn with adjusted font size.
+
+        :param hymn: The hymn instance.
+        :return: A list of elements for the body paragraphs.
+        """
+        elements = []
+        paragraphs = hymn.text.strip().split("\n\n")
+        adjusted_style = self._adjust_font_size(hymn.text, self.body_style)
+        for paragraph in paragraphs:
+            elements.append(Paragraph(paragraph.replace("\n", "<br/>"), adjusted_style))
+        return elements
+
+    def _build_received_at(self, hymn: Hymn) -> List[Paragraph]:
+        """
+        Build the received_at element for a hymn.
+
+        :param hymn: The hymn instance.
+        :return: A list of elements for the received_at.
+        """
+        elements = []
+        if hymn.received_at:
+            elements.append(Paragraph(hymn.received_at.strftime("(%d/%m/%Y)"), self.received_at_style))
+        return elements
+
     def _build_elements(self) -> List[Paragraph]:
         """
         Build the PDF elements from the hymn content.
@@ -197,44 +251,11 @@ class HymnPDFGenerator:
         elements = []
 
         for idx, hymn in enumerate(self.hymns, start=1):
-            # Add number and title
-            title = f"{idx:02d}. {hymn.title} ({hymn.number:02d})"
-            elements.append(Paragraph(title, self.title_style))
-
-            # Add horizontal line
-            elements.append(
-                HRFlowable(width="100%", thickness=1, color="black", spaceAfter=0))
-
-            paragraphs = hymn.text.strip().split("\n\n")
-
-            # Add hymn offered_to aligned to the left
-            offered_style = []
-            if hymn.offered_to:
-                offered_style.append(f'Ofertado a {hymn.offered_to}')
-            if hymn.style:
-                offered_style.append(hymn.style)
-
-            # Add hymn style aligned to the right
-            elements.append(
-                Paragraph(' - '.join(offered_style), self.hymn_style_style))
-
-            # Add vertical lines
+            elements.extend(self._build_title_and_header(idx, hymn))
+            elements.extend(self._build_offered_to_and_style(hymn))
             self._add_vertical_lines(elements, hymn)
-
-            # Add body paragraphs with adjusted font size
-            adjusted_style = self._adjust_font_size('\n'.join(paragraphs),
-                                                    self.body_style)
-            for paragraph in paragraphs:
-                elements.append(
-                    Paragraph(paragraph.replace("\n", "<br/>"), adjusted_style))
-
-            # Add the received_at attribute at the bottom
-            if hymn.received_at:
-                elements.append(
-                    Paragraph(hymn.received_at.strftime("(%d/%m/%Y)"),
-                              self.received_at_style))
-
-            # Add a page break after each hymn
+            elements.extend(self._build_body_paragraphs(hymn))
+            elements.extend(self._build_received_at(hymn))
             elements.append(PageBreak())
 
         return elements
@@ -251,6 +272,7 @@ if __name__ == "__main__":
             title=hymn.get('title'),
             style=hymn.get('style'),
             offered_to=hymn.get('offered_to'),
+            extra_instructions=hymn.get('extra_instructions'),
             text=hymn.get('text'),
             repetitions=hymn.get('repetitions'),
             received_at=hymn.get('received_at')
