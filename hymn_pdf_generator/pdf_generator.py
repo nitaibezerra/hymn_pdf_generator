@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Optional
 
 import yaml
@@ -26,6 +26,26 @@ class Hymn:
     text: str
     repetitions: Optional[str]
     received_at: Optional[str]
+    pagesize: tuple = field(default=(288, 432))
+    margin: float = field(default=0.5 * inch)
+
+    @property
+    def adjusted_font_size(self) -> int:
+        """
+        Calculate the adjusted font size to fit the text within the given width.
+
+        :return: The adjusted font size.
+        """
+        font_name = 'Times-Roman'
+        font_size = 14
+        max_width = self.pagesize[0] - 2 * self.margin
+        max_width -= 16  # Adjust for the leading
+
+        for line in self.text.split("\n"):
+            while stringWidth(line, font_name, font_size) > max_width and font_size > 6:
+                font_size -= 1
+
+        return font_size
 
 
 class VerticalLine(Flowable):
@@ -176,8 +196,7 @@ class HymnPDFGenerator:
         elements = []
         title = f"{idx:02d}. {hymn.title} ({hymn.number:02d})"
         elements.append(Paragraph(title, self.title_style))
-        elements.append(HRFlowable(width="100%", thickness=1,
-                                   color="black", spaceAfter=0))
+        elements.append(HRFlowable(width="100%", thickness=1, color="black", spaceAfter=0))
         return elements
 
     def _build_offered_to_and_style(self, hymn: Hymn) -> List[Paragraph]:
@@ -193,31 +212,8 @@ class HymnPDFGenerator:
             offered_style.append(f'Ofertado a {hymn.offered_to}')
         if hymn.style:
             offered_style.append(hymn.style)
-        elements.append(Paragraph(' - '.join(offered_style),
-                                  self.hymn_style_style))
+        elements.append(Paragraph(' - '.join(offered_style), self.hymn_style_style))
         return elements
-
-
-    def _calculate_adjusted_font_size(
-            self, text: str, font_size: int, font_name: str) -> int:
-        """
-        Calculate the adjusted font size to fit the text within the
-        given width.
-
-        :param text: The text to measure.
-        :param font_size: The initial font size.
-        :param font_name: The font name.
-        :return: The adjusted font size.
-        """
-        max_width = self.pagesize[0] - 2 * self.margin
-        max_width -= 16  # Adjust for the leading
-
-        for line in text.split("\n"):
-            while (stringWidth(line, font_name, font_size) > max_width
-                   and font_size > 6):
-                font_size -= 1
-
-        return font_size
 
     def _build_body_paragraphs(self, hymn: Hymn) -> List[Paragraph]:
         """
@@ -228,8 +224,7 @@ class HymnPDFGenerator:
         """
         elements = []
         paragraphs = hymn.text.strip().split("\n\n")
-        adjusted_font_size = self._calculate_adjusted_font_size(
-            hymn.text, self.body_style.fontSize, self.body_style.fontName)
+        adjusted_font_size = hymn.adjusted_font_size
 
         adjusted_style = ParagraphStyle(
             name=self.body_style.name,
@@ -240,8 +235,7 @@ class HymnPDFGenerator:
         )
 
         for paragraph in paragraphs:
-            elements.append(Paragraph(paragraph.replace("\n", "<br/>"),
-                                      adjusted_style))
+            elements.append(Paragraph(paragraph.replace("\n", "<br/>"), adjusted_style))
         return elements
 
     def _build_received_at(self, hymn: Hymn) -> List[Paragraph]:
@@ -253,8 +247,7 @@ class HymnPDFGenerator:
         """
         elements = []
         if hymn.received_at:
-            elements.append(Paragraph(hymn.received_at.strftime("(%d/%m/%Y)"),
-                                      self.received_at_style))
+            elements.append(Paragraph(hymn.received_at.strftime("(%d/%m/%Y)"), self.received_at_style))
         return elements
 
     def _build_elements(self) -> List[Paragraph]:
@@ -274,6 +267,7 @@ class HymnPDFGenerator:
             elements.append(PageBreak())
 
         return elements
+
 
 if __name__ == "__main__":
     # Load hymns from YAML file
