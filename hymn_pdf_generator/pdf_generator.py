@@ -1,5 +1,4 @@
 from dataclasses import dataclass, field
-from functools import cached_property
 from typing import List, Optional
 
 import yaml
@@ -21,9 +20,22 @@ from hymn_pdf_generator.repetition_bar_allocator import LevelAllocator
 
 
 @dataclass
-class Hymn:
+class Configuration:
+    """Constant values used in multiple classes."""
+    pagesize: tuple = field(default=(4 * inch, 6 * inch))
+    margin: float = field(default=0.5 * inch)
+    font_name: str = field(default='Times-Roman')
+    title_font_size: int = field(default=14)
+    default_body_font_size: int = field(default=14)
+
+
+@dataclass
+class MetaHymn:
     """
-    Data class representing a hymn.
+    Meta class representing a hymn. It's necessary so the Hymn is
+    composed by Configuration and MetaHymn in this order since
+    Configuration has default properties and can't be after non-default
+    properties.
     """
     number: int
     title: str
@@ -33,23 +45,26 @@ class Hymn:
     text: str
     repetitions: Optional[str]
     received_at: Optional[str]
-    pagesize: tuple = field(default=(288, 432))
-    margin: float = field(default=0.5 * inch)
 
-    @cached_property
+
+@dataclass
+class Hymn(Configuration, MetaHymn):
+    """
+    Data class representing a hymn.
+    """
+    @property
     def adjusted_font_size(self) -> int:
         """
         Calculate the adjusted font size to fit the text within the given width.
 
         :return: The adjusted font size.
         """
-        font_name = 'Times-Roman'
-        font_size = 14
+        font_size = self.default_body_font_size
         max_width = self.pagesize[0] - 2 * self.margin
         max_width -= 16  # Adjust for the leading
 
         for line in self.text.split("\n"):
-            while stringWidth(line, font_name, font_size) > max_width and font_size > 6:
+            while stringWidth(line, self.font_name, font_size) > max_width and font_size > 6:
                 font_size -= 1
 
         return font_size
@@ -68,7 +83,7 @@ class VerticalLine(Flowable):
         self.canv.line(self.x, self.y_start, self.x, self.y_end)
 
 
-class HymnPDFGenerator:
+class HymnPDFGenerator(Configuration):
     """
     A class to generate a PDF for a given hymn.
     """
@@ -82,8 +97,6 @@ class HymnPDFGenerator:
         """
         self.hymns = hymns
         self.filename = filename
-        self.pagesize = (288, 432)  # Width: 288 points (4 inches), Height: 432 points (6 inches)
-        self.margin = 0.5 * inch
         self.styles = getSampleStyleSheet()
         self._setup_styles()
 
@@ -94,8 +107,8 @@ class HymnPDFGenerator:
         self.title_style = ParagraphStyle(
             'TitleStyle',
             parent=self.styles['Title'],
-            fontName='Times-Roman',
-            fontSize=14,
+            fontSize=self.title_font_size,
+            fontName=self.font_name,
             leading=20,
             spaceAfter=0
         )
@@ -103,8 +116,8 @@ class HymnPDFGenerator:
         self.body_style = ParagraphStyle(
             'BodyStyle',
             parent=self.styles['BodyText'],
-            fontName='Times-Roman',
-            fontSize=14,
+            fontName=self.font_name,
+            fontSize=self.default_body_font_size,
             leading=16,  # Increased line spacing
             spaceAfter=0.12 * inch
         )
@@ -112,7 +125,7 @@ class HymnPDFGenerator:
         self.hymn_style_style = ParagraphStyle(
             'RightAlignStyle',
             parent=self.styles['Normal'],
-            fontName='Times-Roman',
+            fontName=self.font_name,
             fontSize=12,
             alignment=2,  # Right align
             leading=0,
@@ -122,7 +135,7 @@ class HymnPDFGenerator:
         self.hymn_offered_to_style = ParagraphStyle(
             'LeftAlignStyle',
             parent=self.styles['Normal'],
-            fontName='Times-Roman',
+            fontName=self.font_name,
             fontSize=12,
             alignment=0,  # Left align
             leading=0,
@@ -132,7 +145,7 @@ class HymnPDFGenerator:
         self.received_at_style = ParagraphStyle(
             'ReceivedAtStyle',
             parent=self.styles['Normal'],
-            fontName='Times-Roman',
+            fontName=self.font_name,
             fontSize=10,
             alignment=2,  # Center align
             leading=12,
@@ -236,7 +249,7 @@ class HymnPDFGenerator:
         adjusted_style = ParagraphStyle(
             name=self.body_style.name,
             parent=self.body_style,
-            fontName=self.body_style.fontName,
+            fontName=self.font_name,
             fontSize=adjusted_font_size,
             leading=adjusted_font_size + 2
         )
