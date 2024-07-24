@@ -1,3 +1,5 @@
+import os
+import sys
 from dataclasses import dataclass, field
 from typing import List, Optional
 
@@ -11,6 +13,7 @@ from reportlab.platypus import (
     PageBreak,
     Paragraph,
     SimpleDocTemplate,
+    Spacer
 )
 from reportlab.platypus.flowables import HRFlowable
 
@@ -120,14 +123,14 @@ class HymnPDFGenerator(Configuration):
             spaceAfter=0.12 * inch
         )
 
-        self.hymn_offered_to_and_style_style = ParagraphStyle(
+        self.details_on_top_style = ParagraphStyle(
             'RightAlignStyle',
             parent=self.styles['Normal'],
             fontName=self.font_name,
             fontSize=12,
             alignment=2,  # Right align
-            leading=0,
-            spaceAfter=22
+            leading=14,
+            spaceAfter=8
         )
 
         self.received_at_style = ParagraphStyle(
@@ -156,7 +159,7 @@ class HymnPDFGenerator(Configuration):
         elements = self._build_elements()
         doc.build(elements)
 
-    def _add_vertical_lines(self, hymn: Hymn) -> List[VerticalLine]:
+    def _build_vertical_lines(self, hymn: Hymn) -> List[VerticalLine]:
         """
         Create vertical line elements based on hymn repetitions.
 
@@ -209,20 +212,23 @@ class HymnPDFGenerator(Configuration):
         elements.append(HRFlowable(width="100%", thickness=1, color="black", spaceAfter=0))
         return elements
 
-    def _build_offered_to_and_style(self, hymn: Hymn) -> List[Paragraph]:
+    def _build_details_on_top(self, hymn: Hymn) -> List[Paragraph]:
         """
-        Build the elements for the hymn offered_to and style.
+        Build the elements for the hymn offered_to, extra_instructions
+        and style.
 
         :param hymn: The hymn instance.
-        :return: A list of elements for the offered_to and style.
+        :return: A list of elements for this section.
         """
         offered_style = []
         if hymn.offered_to:
             offered_style.append(f'Ofertado a {hymn.offered_to}')
+        if hymn.extra_instructions:
+            offered_style.append(hymn.extra_instructions)
         if hymn.style:
             offered_style.append(hymn.style)
 
-        style = self.hymn_offered_to_and_style_style
+        style = self.details_on_top_style
         resize_factor = hymn.adjusted_font_size / self.default_body_font_size
         adjusted_style = ParagraphStyle(
             name=style.name,
@@ -230,9 +236,14 @@ class HymnPDFGenerator(Configuration):
             fontName=self.font_name,
             spaceAfter=style.spaceAfter * resize_factor,
         )
-        return [
-            Paragraph(' - '.join(offered_style), adjusted_style)
-        ]
+        if offered_style:
+            return [
+                Paragraph(' - '.join(offered_style), adjusted_style)
+            ]
+        else:
+            return [
+                Spacer(1, 14 * resize_factor + 8)
+            ]
 
     def _build_body_paragraphs(self, hymn: Hymn) -> List[Paragraph]:
         """
@@ -279,8 +290,8 @@ class HymnPDFGenerator(Configuration):
 
         for idx, hymn in enumerate(self.hymns, start=1):
             elements.extend(self._build_title_and_header(idx, hymn))
-            elements.extend(self._build_offered_to_and_style(hymn))
-            elements.extend(self._add_vertical_lines(hymn))
+            elements.extend(self._build_details_on_top(hymn))
+            elements.extend(self._build_vertical_lines(hymn))
             elements.extend(self._build_body_paragraphs(hymn))
             elements.extend(self._build_received_at(hymn))
             elements.append(PageBreak())
