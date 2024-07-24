@@ -130,7 +130,14 @@ class HymnPDFGenerator:
         elements = self._build_elements()
         doc.build(elements)
 
-    def _add_vertical_lines(self, elements, hymn):
+    def _add_vertical_lines(self, hymn: Hymn) -> List[VerticalLine]:
+        """
+        Create vertical line elements based on hymn repetitions.
+
+        :param hymn: The hymn instance.
+        :return: A list of VerticalLine elements.
+        """
+        elements = []
         allocator = LevelAllocator()
         line_positions = allocator.get_entries_with_levels(hymn.repetitions)
 
@@ -157,6 +164,8 @@ class HymnPDFGenerator:
 
             elements.append(
                 VerticalLine(-(level * levels_distance), y_start, y_end))
+
+        return elements
 
     def _adjust_font_size(self, text: str, style: ParagraphStyle) -> ParagraphStyle:
         """
@@ -253,13 +262,12 @@ class HymnPDFGenerator:
         for idx, hymn in enumerate(self.hymns, start=1):
             elements.extend(self._build_title_and_header(idx, hymn))
             elements.extend(self._build_offered_to_and_style(hymn))
-            self._add_vertical_lines(elements, hymn)
+            elements.extend(self._add_vertical_lines(hymn))
             elements.extend(self._build_body_paragraphs(hymn))
             elements.extend(self._build_received_at(hymn))
             elements.append(PageBreak())
 
         return elements
-
 
 if __name__ == "__main__":
     # Load hymns from YAML file
