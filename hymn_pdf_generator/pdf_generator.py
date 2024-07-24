@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from functools import cached_property
 from typing import List, Optional
 
 import yaml
@@ -6,8 +7,14 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import inch
 from reportlab.pdfbase.pdfmetrics import stringWidth
-from reportlab.platypus import (Flowable, HRFlowable, PageBreak, Paragraph,
-                                SimpleDocTemplate, Spacer)
+from reportlab.platypus import (
+    Flowable,
+    HRFlowable,
+    PageBreak,
+    Paragraph,
+    SimpleDocTemplate,
+    Spacer,
+)
 from reportlab.platypus.flowables import HRFlowable
 
 from hymn_pdf_generator.repetition_bar_allocator import LevelAllocator
@@ -29,7 +36,7 @@ class Hymn:
     pagesize: tuple = field(default=(288, 432))
     margin: float = field(default=0.5 * inch)
 
-    @property
+    @cached_property
     def adjusted_font_size(self) -> int:
         """
         Calculate the adjusted font size to fit the text within the given width.
