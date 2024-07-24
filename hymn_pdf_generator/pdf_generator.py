@@ -288,9 +288,9 @@ class HymnPDFGenerator(Configuration):
         return elements
 
 
-if __name__ == "__main__":
+def main(yaml_path: str):
     # Load hymns from YAML file
-    with open('input/selecao_aniversario_ingrid.yaml', 'r') as file:
+    with open(yaml_path, 'r') as file:
         data = yaml.safe_load(file)
 
     hymns = [
@@ -306,9 +306,18 @@ if __name__ == "__main__":
         )
         for hymn in data['hymns']
     ]
+
     # Output filename
-    output_filename = "output/selecao_aniversario_ingrid.pdf"
+    output_filename = os.path.splitext(yaml_path)[0] + ".pdf"
 
     # Create the PDF
     generator = HymnPDFGenerator(hymns, output_filename)
     generator.create_pdf()
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python script.py <path_to_yaml>")
+        sys.exit(1)
+
+    yaml_path = sys.argv[1]
+    main(yaml_path)
