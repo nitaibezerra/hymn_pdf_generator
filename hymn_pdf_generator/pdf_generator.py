@@ -5,9 +5,15 @@ from typing import List, Optional
 
 import yaml
 from reportlab.lib.enums import TA_CENTER
+from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import inch
+from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.pdfmetrics import stringWidth
+
+# Import the required font
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfgen import canvas
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.platypus import (
     Flowable,
@@ -20,9 +26,6 @@ from reportlab.platypus import (
 from reportlab.platypus.flowables import HRFlowable
 
 from hymn_pdf_generator.repetition_bar_allocator import LevelAllocator
-# Import the required font
-from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.pdfbase import pdfmetrics
 
 # Register the DejaVu Sans font
 pdfmetrics.registerFont(TTFont('DejaVuSans', 'DejaVuSans.ttf'))
@@ -91,6 +94,28 @@ class VerticalLine(Flowable):
     def draw(self):
         self.canv.setLineWidth(self.thickness)
         self.canv.line(self.x, self.y_start, self.x, self.y_end)
+
+
+class PageNumCanvas(canvas.Canvas, Configuration):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        Configuration.__init__(self)  # Initialize Configuration
+
+    def showPage(self):
+        self.draw_page_number()
+        super().showPage()
+
+    def draw_page_number(self):
+        page_num = self.getPageNumber() - 1  # Subtract 1 for the cover page
+        if page_num > 0:
+            self.setFont(self.font_name, self.default_body_font_size)
+            self.drawRightString(self.pagesize[0] - self.margin,
+                                 self.margin,
+                                 str(page_num))
+
+    def save(self):
+        self.draw_page_number()
+        super().save()
 
 
 class HymnPDFGenerator(Configuration):
@@ -204,6 +229,7 @@ class HymnPDFGenerator(Configuration):
             alignment=TA_CENTER,
             spaceAfter=24
         )
+
     def create_pdf(self):
         """
         Create a PDF with the hymn content.
@@ -218,7 +244,8 @@ class HymnPDFGenerator(Configuration):
         )
 
         elements = self._build_elements()
-        doc.build(elements)
+        doc.build(elements, canvasmaker=PageNumCanvas)
+        # doc.build(elements)
 
     def _build_vertical_lines(self, hymn: Hymn) -> List[VerticalLine]:
         """
@@ -265,13 +292,16 @@ class HymnPDFGenerator(Configuration):
 
         :return: A list of Paragraph objects for the cover page.
         """
-        elements = []
-
-        elements.append(Spacer(1, 70))
-        elements.append(Paragraph(self.intro_name, self.cover_intro_style))
-        elements.append(Paragraph(self.name, self.cover_name_style))
-        elements.append(Paragraph(self.owner, self.cover_owner_style))
-        elements.append(PageBreak())
+        def br_replacement(text: str) -> Paragraph:
+            return Paragraph(text.replace("\n", "<br/>"),
+                             self.cover_intro_style)
+        elements = [
+            Spacer(1, 70),
+            br_replacement(self.intro_name),
+            br_replacement(self.name),
+            br_replacement(self.owner),
+            PageBreak(),
+        ]
 
         return elements
 
