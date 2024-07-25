@@ -4,20 +4,29 @@ from dataclasses import dataclass, field
 from typing import List, Optional
 
 import yaml
+from reportlab.lib.enums import TA_CENTER
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import inch
 from reportlab.pdfbase.pdfmetrics import stringWidth
+from reportlab.pdfgen.canvas import Canvas
 from reportlab.platypus import (
     Flowable,
     HRFlowable,
     PageBreak,
     Paragraph,
     SimpleDocTemplate,
-    Spacer
+    Spacer,
 )
 from reportlab.platypus.flowables import HRFlowable
 
 from hymn_pdf_generator.repetition_bar_allocator import LevelAllocator
+# Import the required font
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfbase import pdfmetrics
+
+# Register the DejaVu Sans font
+pdfmetrics.registerFont(TTFont('DejaVuSans', 'DejaVuSans.ttf'))
+
 
 
 @dataclass
@@ -89,15 +98,21 @@ class HymnPDFGenerator(Configuration):
     A class to generate a PDF for a given hymn.
     """
 
-    def __init__(self, hymns: List[Hymn], filename: str):
+    def __init__(self, hymns: List[Hymn], filename: str, intro_name: str, name: str, owner: str):
         """
-        Initialize the HymnPDFGenerator with a hymn and output filename.
+        Initialize the HymnPDFGenerator with hymns, output filename, and cover page details.
 
         :param hymns: A list of Hymn instances.
         :param filename: The output PDF filename.
+        :param intro_name: Introduction name for the cover page.
+        :param name: Name for the cover page.
+        :param owner: Owner name for the cover page.
         """
         self.hymns = hymns
         self.filename = filename
+        self.intro_name = intro_name
+        self.name = name
+        self.owner = owner
         self.styles = getSampleStyleSheet()
         self._setup_styles()
 
@@ -143,6 +158,52 @@ class HymnPDFGenerator(Configuration):
             spaceBefore=20
         )
 
+        self.davi_star_style = ParagraphStyle(
+            'DaviStarStyle',
+            parent=self.styles['Normal'],
+            fontName=self.font_name,
+            fontSize=14,
+            alignment=TA_CENTER,
+            spaceAfter=0.2 * inch
+        )
+
+        self.symbols_style = ParagraphStyle(
+            'SymbolsStyle',
+            parent=self.styles['Normal'],
+            fontName='DejaVuSans',
+            fontSize=14,
+            alignment=TA_CENTER,
+            textColor='black',
+            spaceBefore=0.3 * inch,
+            spaceAfter=0.2 * inch
+        )
+
+        self.cover_intro_style = ParagraphStyle(
+            'CoverIntroStyle',
+            parent=self.styles['Title'],
+            fontName=self.font_name,
+            fontSize=24,
+            alignment=TA_CENTER,
+            spaceAfter=34
+        )
+
+        self.cover_name_style = ParagraphStyle(
+            'CoverNameStyle',
+            parent=self.styles['Title'],
+            fontName=self.font_name,
+            fontSize=24,
+            alignment=TA_CENTER,
+            spaceAfter=34
+        )
+
+        self.cover_owner_style = ParagraphStyle(
+            'CoverOwnerStyle',
+            parent=self.styles['Title'],
+            fontName=self.font_name,
+            fontSize=24,
+            alignment=TA_CENTER,
+            spaceAfter=24
+        )
     def create_pdf(self):
         """
         Create a PDF with the hymn content.
@@ -195,6 +256,22 @@ class HymnPDFGenerator(Configuration):
 
             elements.append(
                 VerticalLine(-(level * levels_distance), y_start, y_end))
+
+        return elements
+
+    def _build_cover_page(self) -> List[Paragraph]:
+        """
+        Build the cover page elements.
+
+        :return: A list of Paragraph objects for the cover page.
+        """
+        elements = []
+
+        elements.append(Spacer(1, 70))
+        elements.append(Paragraph(self.intro_name, self.cover_intro_style))
+        elements.append(Paragraph(self.name, self.cover_name_style))
+        elements.append(Paragraph(self.owner, self.cover_owner_style))
+        elements.append(PageBreak())
 
         return elements
 
@@ -268,6 +345,26 @@ class HymnPDFGenerator(Configuration):
             elements.append(Paragraph(paragraph.replace("\n", "<br/>"), adjusted_style))
         return elements
 
+    def _build_davi_star(self) -> Paragraph:
+        """
+        Build the Davi star symbol element.
+
+        :return: A Paragraph element containing the Davi star symbol.
+        """
+        return Paragraph("&#x2721;", self.davi_star_style)
+
+    def _build_additional_symbols(self) -> Paragraph:
+        """
+        Build the additional symbols element (sun, moon, star).
+
+        :return: A Paragraph element containing the sun, moon, and star symbols.
+        """
+        sun_symbol = "☀"
+        moon_symbol = "☾"
+        star_symbol = "★"
+        symbols = f"{sun_symbol} {moon_symbol} {star_symbol}"
+        return Paragraph(symbols, self.symbols_style)
+
     def _build_received_at(self, hymn: Hymn) -> List[Paragraph]:
         """
         Build the received_at element for a hymn.
@@ -288,11 +385,17 @@ class HymnPDFGenerator(Configuration):
         """
         elements = []
 
+        elements.extend(self._build_cover_page())
+
         for idx, hymn in enumerate(self.hymns, start=1):
             elements.extend(self._build_title_and_header(idx, hymn))
             elements.extend(self._build_details_on_top(hymn))
             elements.extend(self._build_vertical_lines(hymn))
             elements.extend(self._build_body_paragraphs(hymn))
+            if idx % 3 != 0:
+                elements.append(self._build_davi_star())
+            else:
+                elements.append(self._build_additional_symbols())
             elements.extend(self._build_received_at(hymn))
             elements.append(PageBreak())
 
@@ -303,6 +406,12 @@ def main(yaml_path: str):
     # Load hymns from YAML file
     with open(yaml_path, 'r') as file:
         data = yaml.safe_load(file)
+
+    hymn_book = data['hymn_book']
+
+    intro_name = hymn_book['intro_name']
+    name = hymn_book['name']
+    owner = hymn_book['owner']
 
     hymns = [
         Hymn(
@@ -315,14 +424,14 @@ def main(yaml_path: str):
             repetitions=hymn.get('repetitions'),
             received_at=hymn.get('received_at')
         )
-        for hymn in data['hymns']
+        for hymn in hymn_book['hymns']
     ]
 
     # Output filename
     output_filename = os.path.splitext(yaml_path)[0] + ".pdf"
 
     # Create the PDF
-    generator = HymnPDFGenerator(hymns, output_filename)
+    generator = HymnPDFGenerator(hymns, output_filename, intro_name, name, owner)
     generator.create_pdf()
 
 if __name__ == "__main__":

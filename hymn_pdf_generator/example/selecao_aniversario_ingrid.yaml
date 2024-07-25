@@ -1,804 +1,816 @@
-hymns:
-  - number: 62
-    title: "Disciplina"
-    text: |
-      Santa Maria
-      O caminho da disciplina
-      Vem chegando noite e dia
-      Como a luz de um clarão
-
-      Eu peço força
-      Das estrelas que me guiam
-      Que brilham no firmamento
-      Com minha Santa Maria
-    repetitions: "1-4"
-    received_at: 2020-01-18
-
-  - number: 63
-    title: "Flores do peito"
-    text: |
-      De meu peito nascem flores
-      Flores de diversas cores
-      Que alegria em meu peito
-      Um coração de tantos amores
-
-      Flores verdes cintilantes
-      Rosas brancas do jardim
-      Da princesa Soloína
-      É o que trazes para mim
-    repetitions: "1-4"
-    received_at: 2020-01-21
-
-  - number: 67
-    title: "Prepara"
-    text: |
-      Prepara, prepara
-      Prepare-se quem vai viajar
-      Esta nave vai decolar
-      Com a nave do bem estar
-    repetitions: "1-2, 3-4"
-    received_at: 2020-01-22
-
-  - number: 68
-    title: "Cajado"
-    text: |
-      Firmado com meu cajado
-      Sabendo que hei de vencer
-      Estou com Deus, estou com Deus
-      Estou com Deus sem mais nem ver
-    repetitions: "1-2, 3-4"
-    received_at: 2020-01-29
-
-  - number: 70
-    title: "Flecha"
-    offered_to: Ana Luísa Jófili
-    text: |
-      Oxóssi é a flecha
-      De meu coração
-      Vem chegando Papai Velho
-      E meu São Sebastião
-
-      Com a força das matas
-      Sou um beija-flor
-      Vibro com o voo de meu pai
-      Aqui perante esta flor
-
-      Um grande rochedo
-      Escudo da paz
-      Segue no espelho d’água
-      De onde vem e para onde vai
-    repetitions: "1-2, 3-4, 1-4"
-    received_at: 2020-08-24
-
-  - number: 77
-    title: "Perdão"
-    text: |
-      Cuidado para não se entortar
-      Quando estás falando deste mundo de ilusão
-
-      Quem muito fala, logo logo vai ficar
-      E quem não teme nunca pediu o perdão
-
-      Ouviste que temer a Deus é sofrimento
-      Sofreste tanto quanto pediste o perdão
-    repetitions: "1-2"
-    received_at: 2020-03-20
-
-  - number: 79
-    title: "Estrela de claridade"
-    offered_to: Widsonmary Vital
-    extra_instructions: "Em pé, sem instrumentos"
-    text: |
-      Meu pai do céu
-      De coração
-      Me iluminai
-      Nesta missão
-
-      Meu pai no céu
-      Eu com teu coração
-      Sigo neste caminho
-      Em vossa proteção
-
-      União, fé
-      Foi a tua verdade
-      Que acreditou em mim
-      Estrela de claridade
-    repetitions: "1-4"
-    received_at: 2020-04-09
-
-  - number: 81
-    title: "Terra Santa"
-    text: |
-      Vem do meu mensageiro
-      General Juramidam
-      Vem de uma terra santa
-      Vem nos ventos de Iansã
-
-      Cavaleiro da Rainha
-      Tabuleiro desta vida
-      Ouros, paus, espadas
-      Nas copas ainda há pó
-
-      Vou apitar um chamado
-      Que me veio no cipó
-      Vou afirmar o meu canto
-      Sei que não me acho só
-
-      Abre o véu que ainda há pouco
-      Desvelado da ilusão
-      Guerreia na baliza
-      Pela memorosa lição
-    repetitions: "1-4"
-    received_at: 2020-06-10
-
-  - number: 87
-    title: "Avança"
-    text: |
-      Vai, avança
-      E segura a minha mão
-      Para eu seguir contigo
-      Dentro desta missão
-
-      Vai, prossegue
-      Dentro desta união
-      Eu quero seguir com vós
-      Junto com meu São João
-    repetitions: "1-4"
-    received_at: 2020-06-30
-
-  - number: 88
-    title: "O tempo"
-    text: |
-      O tempo chega e vai derramando alegria
-      Aos que rodeiam o menino do Salvador
-      O tempo chega e vai firmando a proteção
-      Aos que compõem o reinado de Salomão
-
-      O tempo passa e vai mostrando na matéria
-      A verdade sobre o valor dessas dores
-      O tempo passa e educa o pensamento
-      Na lembrança do que ficou por amor
-    repetitions: "1-2, 3-4"
-    received_at: 2020-07-08
-
-  - number: 89
-    title: "Novo paraíso"
-    text: |
-      Vós me mostrai o que é possível
-      Neste novo paraíso
-      Que lembrança é feita
-      De todo amor
-
-      Vós me mostrai o que é possível
-      Neste mundo invisível
-      Em que fraquejos desmereço
-      Seu valor
-    repetitions: "1-4"
-    received_at: 2020-07-09
-
-  - number: 90
-    title: "Soma das matérias"
-    text: |
-      Ouve um tanto e fala pouco
-      E vai conhecendo teus caboclos
-      Que o tempo está lembrado
-      E não jura o quanto é pouco
-
-      Quem repreende diminui
-      Quem doar se multiplica
-      Nesta soma das matérias
-      Se acumulam armadilhas
-    repetitions: "1-2, 3-4"
-    received_at: 2020-08-07
-
-  - number: 93
-    title: "Arco-íris"
-    text: |
-      Gotas de cores
-      Luz de muitas flores
-      Gota de orvalho
-      Aquece o amor
-
-      Gotas no arco
-      Celeste do astral
-      Flores dos olhos
-      Revelam o labor
-
-      São muitas flores
-      Flores e mais flores
-      Flores pequenas
-      Grandes no amor
-    repetitions: "1-2, 3-4"
-    received_at: 2020-09-25
-
-  - number: 96
-    title: "Lição imprensada"
-    text: |
-      O daime é o nosso protetor
-      Que vibra nas ondas das águas
-      Quando da panela levanta a fervura
-      Eu vejo uma lição imprensada
-
-      Fogo que acende água é para transformar
-      Em justiça a má ossada
-      Purifica no vento o que é para tomar
-      Canta, canta, acende a casa
-    repetitions: "1-2, 3-4"
-    received_at: 2020-10-07
-
-  - number: 99
-    title: "Voz do padrinho"
-    text: |
-      Eu tomo daime por estar
-      Na casa do padrinho
-      Tomo daime para escutar
-      Sua voz no meu caminho
-
-      Ando escutando tanto hino
-      E ainda hei de cantar
-      Que esta linha é estreita
-      Sempre havemos de zelar
-
-      Uma voz me alertou
-      Que eu não caminho sozinho
-      Ando com os três em minha mente
-      E uma luz em meu caminho
-
-      Pai, filho e espírito santo
-      Caminhando a bailar
-      Que esta festa é reunida
-      De alegria a festejar
-
-      Esta linha é professora
-      Agradeço a missão
-      De estar hoje reunida
-      E celebrar com diversão
-    repetitions: "1-4"
-    received_at: 2020-10-14
-
-  - number: 100
-    title: "Felicidade"
-    text: |
-      Que felicidade é trabalhar nesta linha
-      Que felicidade é trabalhar com amor
-      Que felicidade é cantar com alegria
-      É bailar com harmonia
-      Pela luz do redentor
-
-      Que felicidade, meus irmãos, sigo dizendo
-      Que felicidade, meus irmãos, sigo cantando
-      Quanta harmonia, amor, verdade e justiça
-      Estão dispostos nesta linha
-      Pra quem sabe dar valor
-
-      Que felicidade é a que existe a cada dia
-      Que felicidade é a paz deste clamor
-      Que felicidade, meus irmãos, senti um dia
-      De fardar pela Rainha
-      Consagrando este amor
-    repetitions: "1-5"
-    received_at: 2020-10-20
-
-  - number: 2
-    title: "Ciranda"
-    offered_to: "Mad. Maria Cristina"
-    text: |
-      A água da chuva
-      Me banhou pelo seu rio
-      Desci pelas cachoeiras
-      Que mamãe Oxum pariu
-
-      Mimosa florzinha
-      De papai Oxalá
-      Esta paz que eu respiro
-      O cantar é que nos dá
-
-      No meio das flores
-      No colo de Nanã
-      Esculpindo neste barro
-      O dia de amanhã
-
-      Semeia a colheita
-      Que um dia há de brotar
-      Se Oxóssi é quem ensina
-      Rei Oxóssi é quem nos dá
-
-      Mamãe natureza
-      Nas redondezas do mar
-      Rodo o mundo em tuas águas
-      Iemanjá vai me levar
-
-      Sereia, princesa
-      Nas pedreiras esplendor
-      Sob a luz da cachoeira
-      Tem morada de Xangô
-
-      Voando no vento
-      Veloz como Iansã
-      Onde tem um olho d’água
-      Corre o vento de mamãe
-
-      Nadando na água
-      No trono do mar
-      Salve a Lua prateada
-      Salve Ogum da Beira-Mar
-
-      Esta linda ciranda
-      Eu deixei pra vós cantar
-      Canta, canta ibeijada
-      No brilho deste luar
-    repetitions: "1-2, 3-4"
-    received_at: 2020-11-02
-
-  - number: 5
-    title: "Amigo"
-    offered_to: "Amanda Amorim"
-    text: |
-      Amigo, amigo
-      Amigo eu tenho sorte
-      Por poder lhe chamar de amigo
-
-      Amigo, amigo
-      Fique firme na estrada
-      Que esta é uma luz de abrigo
-
-      Amigo, amigo
-      Cada dia traz melhores
-      O amanhã é um caminho
-    repetitions: "1-3"
-    received_at: 2020-12-01
-
-  - number: 11
-    title: "Cada passo"
-    text: |
-      Cada passo que dou
-      É um passo no infinito
-      No clarão da lua cheia
-      O vento traz um bom amigo
-    repetitions: "1-2, 3-4"
-    received_at: 2020-12-16
-
-  - number: 12
-    title: "Estrela"
-    text: |
-      Me coloca a estrela
-      Para eu me defender
-      Me coloca a armadura
-      Para eu ir batalhar
-
-      Escudos da luz
-      São estes
-      Que estão prontos para lutar
-    repetitions: "1-4,  -7"
-    received_at: 2020-12-19
-
-  - number: 13
-    title: "Pequenina"
-    style: "Valsa"
-    text: |
-      Ouço o cantar dos passarinhos
-      Vejo as belezas do oceano
-      Sou pequenina e trago uma história
-      Para mostrar meu reino de glória
-
-      Eu sou riqueza do oceano
-      Eu sou princesa e sigo cantando
-      Tenho presentes para entregar
-      A todos aqueles que vir cantar
-    repetitions: "1-2, 3-4"
-    received_at: 2020-12-19
-
-  - number: 16
-    title: "Era uma vez"
-    text: |
-      Era uma vez, era uma vez
-      O que eu queria aprender
-      O meu povo já me disse
-      Leva tudo de uma vez
-
-      Era uma vez, era uma vez
-      O que morri sem aprender
-      O meu povo já dizia
-      Se morreu levou de vez
-
-      Era uma vez, era uma vez
-      O que eu deixei para vocês
-      Deixei tudo que diziam
-      Desta vez contarei eu
-    repetitions: "1-4"
-    received_at: 2020-12-26
-
-  - number: 18
-    title: "Ouvi dizer"
-    text: |
-      Ouvi dizer
-      Que o mestre avisou
-      Que o tempo todo passa
-      E o amanhã já é de novo
-
-      Mais um mais um
-      Muita gente escolheu
-      O que ao velho não engana
-      E vem um novo amigo meu
-
-      Vou caprichar
-      Nesta nova seleção
-      Vim me apresentar na escola
-      De uma eterna instrução
-
-      O que eu pedi
-      Papai já reconheceu
-      Mandou desde um outro tempo
-      Junto ao bom amigo seu
-    repetitions: "1-2, 3-4"
-    received_at: 2021-07-04
-
-  - number: 19
-    title: "Sempre agradecendo"
-    style: "Valsa"
-    text: |
-      Sempre agradecendo
-      Junto aos meus irmãos
-      Sempre trago esta chave de ouro
-      Gravada em meu coração
-
-      Vou abrindo esta porta
-      Uma missão de lições
-      Entregando o que cabe a mim
-      E recebendo minha coroação
-
-      Mamãezinha chamando
-      Não espero e já vou
-      Ela é quem me dá todo conforto
-      Meu pai me mostrou com grandeza
-
-      Com toda esta força
-      Entendo muito melhor
-      O que devo, mereço, conquisto
-      Com a paz e com o tom do perdão
-    repetitions: "1-2, 3-4"
-    received_at: 2021-09-11
-
-  - number: 20
-    title: "Fogueira"
-    text: |
-      Imaginem o alarde
-      meus irmãos cantando
-      Abrindo os caminhos
-
-      Uma estrela de luz
-      Que pousou na fogueira
-      Chegou meu Padrinho
-
-      Oh que luz tão formosa
-      Uma tarde brilhante
-      De muita alegria
-
-      Pousou no meu peito
-      Me trouxe meu pai
-      Numa paz de algum dia
-    repetitions: "1-3, 4-6"
-    received_at: 2021-09-13
-
-  - number: 21
-    title: "O mar"
-    style: "Valsa"
-    offered_to: Max
-    text: |
-      O mar é um novo mundo
-      Me sinto e acalmo o mar na escuridão
-      Com seu farol a me guiar
-      Lua delicada, raio do coração
-
-      A água é um novo mundo
-      Suas cordas de água tocam meu coração
-      Na harmonia do violão
-      Suas cordas de água tocam meu coração
-    repetitions: "1-2, 3-4"
-    received_at: 2021-09-25
-
-  - number: 22
-    title: "Sempre viva"
-    style: "Valsa"
-    offered_to: Mad. Liberdade
-    text: |
-      Abrir o coração
-      Num auxílio divino
-      É uma flor que apresenta
-      Este estudo fino
-
-      Eu estava longe
-      Pensei em voltar
-      Meu pai quem me trouxe
-      Para aqui cantar
-
-      Voava com o vento
-      Dançava com o mar
-      Ela sempre viva
-      Me ensina a sonhar
-
-      Formosa, mimosa
-      Florzinha de amor
-      Me trouxe do espaço
-      Um pedido aonde estou
-    repetitions: "1-4"
-    received_at: 2021-10-22
-
-  - number: 24
-    title: "Um tesouro"
-    offered_to: Rodrigo Jófili
-    text: |
-      Olha o que eu vou te dizer
-      Olha o que o mestre está fazendo
-      Jesus Cristo avisou
-      O que vinha há muito tempo
-
-      As palavras que disserem
-      Estão vindo enganadas
-      Se não prestarem atenção
-      Na harmonia desta casa
-
-      Amor, verdade e justiça
-      Se apresentam em seguida
-      Que o meu mestre é poderoso
-      Não brinca com a disciplina
-
-      No jardim desta estrada
-      Do império tem um tesouro
-      Não pode brotar julgamento
-      No que a rainha entregou
-
-      O jagube em sua força
-      Vai mostrando a lição
-      Vai sentir a chamada
-      Quem não entrar em apuração
-
-      O meu coração renova
-      De alegria nesta história
-      Por contar com um irmão
-      Com uma paz viva na memória
-
-      Esta paz é uma beleza
-      Multiplica a união
-      Faz crescer a minha fé
-      Ser leal a esta missão
-    repetitions: "1-2, 3-4"
-    received_at: 2021-10-26
-
-  - number: 26
-    title: "Confiar"
-    style: "Valsa"
-    text: |
-      Eu te ensino a confiar
-      Vim nesta canção pra zelar
-      Da tua palavra
-      Do teu pensamento
-
-      Sou eu flor misericordiosa
-      Me apresento numa bela rosa
-      Ditando primores
-      À tua consciência
-
-      Vim te mostrar amor na dor
-      Erguer teu coração criador
-      Tu segues e ganhas
-      O teu firmamento
-    repetitions: "3-4, 1-4"
-    received_at: 2021-11-10
-
-  - number: 27
-    title: "Navegação"
-    text: |
-      Eu peço ao meu São João
-      Eu peço a Virgem da Conceição
-      Que segure forte minha mão
-      Que eu vou entrar nesta navegação
-
-      Eu vou seguindo esta estrela de luz
-      Bem ancorada no meu senhor Jesus
-      Ela tem um destino na mão
-      Vai pro meu peito e alegra o meu coração
-
-      Ela é uma chave de beleza
-      Te abrindo o templo desta fortaleza
-      Eu te dou, eu te dou com amor
-      Saiba ser simples pra viver a imensidão
-
-      As estrelas são uma firmeza
-      Um tesouro pra guiar a fortaleza
-      A fortaleza é o teu coração
-      Zela com carinho e vai brotar a atenção
-    repetitions: "1-2, 3-4"
-    received_at: 2021-11-24
-
-  - number: 28
-    title: "Zelando pelas flores"
-    text: |
-      Mãezinha eu vou te escutar
-      Zelando pelas flores sei que vós vem me zelar
-      Mãezinha eu vou te escutar
-      Zelando pelas flores sei que vós vem me saudar
-    repetitions: "1-2, 3-4"
-    received_at: 2022-01-20
-
-  - number: 32
-    title: "Nova semente"
-    style: "Valsa"
-    offered_to: Flávia Santana
-    text: |
-      Uns se seguram de cá
-      Outros se seguram de lá
-      Nesse véu por entre os mundos
-      Eu vou me apresentar
-
-      Uma nova semente brotou
-      Se segure nesse amor
-      Tudo vem da mãe soberana
-      E aqui se passa com vigor
-
-      Tudo que aqui foi aberto
-      Se correu para enxergar
-      Mais do mesmo de muita importância
-      Com os meus irmãos me ligar
-
-      A segurança pra se firmar no tempo
-      Está para além da matéria
-      Se ligando em tudo no espaço
-      A doçura se soma na fé
-    repetitions: "1-2, 3-4"
-    received_at: 2022-10-21
-
-  - number: 36
-    title: "O barquinho"
-    text: |
-      A presença deste brilho
-      Sempre traz o seu sustento
-      A certeza que balança
-      Arde no teu sofrimento
-
-      Vai saindo pouco a pouco
-      E lá se vai pela tangente
-      Segue firme no barquinho
-      Ele vem salvando a gente
-
-      Aliviando os teus passos
-      Lá se vai a ilusão
-      O princípio dessas ondas
-      É a rosa do meu coração
-
-      Assim peço meu perdão
-      Levando a bandeira da paz
-      Toda onda que quebranta
-      Eleva e aprendo algo mais
-    repetitions: "1-4"
-    received_at: 2023-02-14
-
-  - number: 54
-    title: "Serena"
-    offered_to: "Helena Borges"
-    text: |
-      Serena serenou
-      Serenou serena
-      Na linha de umbanda
-      Vamos todos cirandar
-
-      Nesta linda ciranda
-      Da gira da umbanda
-      Viemos de mansinho
-      Para a todos serenar
-    repetitions: "1-2, 3-4"
-    received_at: 2023-10-07
-
-  - number: 66
-    title: "A calma"
-    style: "Valsa"
-    text: |
-      A calma e paz do meu pai Oxalá
-      A calma e paz do meu pai Oxalá
-
-      Vim nas campinas, vim pra viajar
-      Serenando o mais que a vida dirá
-      Vou colher flores para festejar
-      Florescer as matas pelo meu cantar
-    repetitions: "1-2"
-    received_at: 2023-12-15
-
-  - number: 68
-    title: "Caminheiro"
-    offered_to: "Sávio"
-    text: |
-      Caminheiro caminhei
-      Caminheiro eu sou assim
-      Sou eu quem estou chamando
-      Vós pra pertinho de mim
-
-      Canoeiro vai na frente
-      Nossa Senhora na proa
-      Eu chamo os meus irmãos
-      Para ver uma coisa boa
-
-      Se ligando em coisa boa
-      Vamos vencer todos juntos
-      Ver a coisa ficar boa
-      Crescendo seu próprio rumo
-
-      Vamos viver mais de perto
-      Com meus irmãos se ligando
-      Cada um atento e esperto
-      No que vai se amostrando
-
-      Vamos dizer com a verdade
-      Vamos viver com harmonia
-      Sou a corte da justiça
-      No baile do amor
-    repetitions: "1-4"
-    received_at: 2023-12-21
-
-  - number: 74
-    title: "Bem estimados"
-    text: |
-      Olha os bem estimados, os bem estimados
-      Olhe por ti mesmo e estarás ocupado
-      Olha os bem estimados, os bem estimados
-      Vai andando com Deus que caminha ao teu lado
-    repetitions: "1-4"
-    received_at: 2024-01-15
-
-  - number: 75
-    title: "Ligar em Deus"
-    offered_to: "Nitai"
-    text: |
-      Eu vou me ligar em Deus
-      Com Ele é que eu vou subir
-      Junto a soberana mãe
-      É quem está juntinho a mim
-
-      Nossa soberana mãe
-      Vós nos faz todos inocentes
-      Defendei os vossos filhos
-      De todo mal que à Terra desce
-
-      O mar cresce nas alturas
-      E me leva a meu Pai
-      Com as águas de mamãe
-      Me elevo e levo mais
-    repetitions: "1-2, 3-4"
-    received_at: 2024-01-26
-
-  - number: 77
-    title: "Matinada"
-    offered_to: "Alane"
-    text: |
-      Eu amparo fingimento com amor
-      Aqui respaldo e acredito no que sou
-      Eu sou sublime, soberano amor
-      Minha semente eu doei para dar flor
-
-      Sob a lua nova daqui da Terra irradia
-      Uma faísca de inteiro resplendor
-      Eu não confundo quem está doente
-      Para receber uma palavra de amor
-
-      Flores brancas chegam voando do espaço
-      Para quem quer ver os anjos arrodear
-      Tocar uma matinada incandescente
-      Para florescer a santa cruz de todos nós
-    repetitions: "1-2, 3-4"
-    received_at: 2024-01-29
-
-  - number: 79
-    title: "Escala"
-    style: "Valsa"
-    offered_to: "Kézia Marinho"
-    text: |
-      Já dá para enxergar
-      Que eu sou luz, eu sou amor
-      Voz de discernimento
-      Na fé e na dor
-
-      Conheci esta escola
-      Me entreguei para amar
-      Escalando esta estrada
-      Que dá no Mapiá
-    repetitions: "1-4"
-    received_at: 2024-02-26
+hymn_book:
+  intro_name: "Seleção de aniversário"
+  name: |
+    Prósperas Águas
+    &
+    Morada Divina
+  owner: "Ingrid Vital"
+  hymns:
+    - number: 62
+      title: "Disciplina"
+      text: |
+        Santa Maria
+        O caminho da disciplina
+        Vem chegando noite e dia
+        Como a luz de um clarão
+
+        Eu peço força
+        Das estrelas que me guiam
+        Que brilham no firmamento
+        Com minha Santa Maria
+      repetitions: "1-4, 5-8"
+      received_at: 2020-01-18
+
+    - number: 63
+      title: "Flores do peito"
+      text: |
+        De meu peito nascem flores
+        Flores de diversas cores
+        Que alegria em meu peito
+        Um coração de tantos amores
+
+        Flores verdes cintilantes
+        Rosas brancas do jardim
+        Da princesa Soloína
+        É o que trazes para mim
+      repetitions: "1-4"
+      received_at: 2020-01-21
+
+    - number: 67
+      title: "Prepara"
+      text: |
+        Prepara, prepara
+        Prepare-se quem vai viajar
+        Esta nave vai decolar
+        Com a nave do bem estar
+      repetitions: "1-2, 3-4"
+      received_at: 2020-01-22
+
+    - number: 68
+      title: "Cajado"
+      text: |
+        Firmado com meu cajado
+        Sabendo que hei de vencer
+        Estou com Deus, estou com Deus
+        Estou com Deus sem mais nem ver
+      repetitions: "1-2, 3-4"
+      received_at: 2020-01-29
+
+    - number: 70
+      title: "Flecha"
+      offered_to: Ana Luísa Jófili
+      text: |
+        Oxóssi é a flecha
+        De meu coração
+        Vem chegando Papai Velho
+        E meu São Sebastião
+
+        Com a força das matas
+        Sou um beija-flor
+        Vibro com o voo de meu pai
+        Aqui perante esta flor
+
+        Um grande rochedo
+        Escudo da paz
+        Segue no espelho d’água
+        De onde vem e para onde vai
+      repetitions: "1-2, 3-4, 1-4"
+      received_at: 2020-08-24
+
+    - number: 77
+      title: "Cuidado"
+      text: |
+        Cuidado para não se entortar
+        Quando estás falando deste mundo de ilusão
+
+        Quem muito fala, logo logo vai ficar
+        E quem não teme nunca pediu o perdão
+
+        Ouviste que temer a Deus é sofrimento
+        Sofreste tanto quanto pediste o perdão
+      repetitions: "1-2"
+      received_at: 2020-03-20
+
+    - number: 79
+      title: "Estrela de claridade"
+      offered_to: Widsonmary Vital
+      extra_instructions: "Em pé, sem instrumentos"
+      text: |
+        Meu pai do céu
+        De coração
+        Me iluminai
+        Nesta missão
+
+        Meu pai no céu
+        Eu com teu coração
+        Sigo neste caminho
+        Em vossa proteção
+
+        União, fé
+        Foi a tua verdade
+        Que acreditou em mim
+        Estrela de claridade
+      repetitions: "1-4"
+      received_at: 2020-04-09
+
+    - number: 81
+      title: "Terra Santa"
+      text: |
+        Vem do meu mensageiro
+        General Juramidam
+        Vem de uma terra santa
+        Vem nos ventos de Iansã
+
+        Cavaleiro da Rainha
+        Tabuleiro desta vida
+        Ouros, paus, espadas
+        Nas copas ainda há pó
+
+        Vou apitar um chamado
+        Que me veio no cipó
+        Vou afirmar o meu canto
+        Sei que não me acho só
+
+        Abre o véu que ainda há pouco
+        Desvelado da ilusão
+        Guerreia na baliza
+        Pela memorosa lição
+      repetitions: "1-4"
+      received_at: 2020-06-10
+
+    - number: 87
+      title: "Avança"
+      text: |
+        Vai, avança
+        E segura a minha mão
+        Para eu seguir contigo
+        Dentro desta missão
+
+        Vai, prossegue
+        Dentro desta união
+        Eu quero seguir com vós
+        Junto com meu São João
+      repetitions: "1-4"
+      received_at: 2020-06-30
+
+    - number: 88
+      title: "O tempo"
+      text: |
+        O tempo chega e vai derramando alegria
+        Aos que rodeiam o menino do Salvador
+        O tempo chega e vai firmando a proteção
+        Aos que compõem o reinado de Salomão
+
+        O tempo passa e vai mostrando na matéria
+        A verdade sobre o valor dessas dores
+        O tempo passa e educa o pensamento
+        Na lembrança do que ficou por amor
+      repetitions: "1-2, 3-4"
+      received_at: 2020-07-08
+
+    - number: 89
+      title: "Novo paraíso"
+      text: |
+        Vós me mostrai o que é possível
+        Neste novo paraíso
+        Que lembrança é feita
+        De todo amor
+
+        Vós me mostrai o que é possível
+        Neste mundo invisível
+        Em que fraquejos desmereço
+        Seu valor
+      repetitions: "1-4"
+      received_at: 2020-07-09
+
+    - number: 90
+      title: "Soma das matérias"
+      text: |
+        Ouve um tanto e fala pouco
+        E vai conhecendo teus caboclos
+        Que o tempo está lembrado
+        E não jura o quanto é pouco
+
+        Quem repreende diminui
+        Quem doar se multiplica
+        Nesta soma das matérias
+        Se acumulam armadilhas
+      repetitions: "1-2, 3-4"
+      received_at: 2020-08-07
+
+    - number: 93
+      title: "Arco-íris"
+      text: |
+        Gotas de cores
+        Luz de muitas flores
+        Gota de orvalho
+        Aquece o amor
+
+        Gotas no arco
+        Celeste do astral
+        Flores dos olhos
+        Revelam o labor
+
+        São muitas flores
+        Flores e mais flores
+        Flores pequenas
+        Grandes no amor
+      repetitions: "1-2, 3-4"
+      received_at: 2020-09-25
+
+    - number: 96
+      title: "Lição imprensada"
+      text: |
+        O daime é o nosso protetor
+        Que vibra nas ondas das águas
+        Quando da panela levanta a fervura
+        Eu vejo uma lição imprensada
+
+        Fogo que acende água é para transformar
+        Em justiça a má ossada
+        Purifica no vento o que é para tomar
+        Canta, canta, acende a casa
+      repetitions: "1-2, 3-4"
+      received_at: 2020-10-07
+
+    - number: 99
+      title: "Voz do padrinho"
+      text: |
+        Eu tomo daime por estar
+        Na casa do padrinho
+        Tomo daime para escutar
+        Sua voz no meu caminho
+
+        Ando escutando tanto hino
+        E ainda hei de cantar
+        Que esta linha é estreita
+        Sempre havemos de zelar
+
+        Uma voz me alertou
+        Que eu não caminho sozinho
+        Ando com os três em minha mente
+        E uma luz em meu caminho
+
+        Pai, filho e espírito santo
+        Caminhando a bailar
+        Que esta festa é reunida
+        De alegria a festejar
+
+        Esta linha é professora
+        Agradeço a missão
+        De estar hoje reunida
+        E celebrar com diversão
+      repetitions: "1-4"
+      received_at: 2020-10-14
+
+    - number: 100
+      title: "Felicidade"
+      text: |
+        Que felicidade é trabalhar nesta linha
+        Que felicidade é trabalhar com amor
+        Que felicidade é cantar com alegria
+        É bailar com harmonia
+        Pela luz do redentor
+
+        Que felicidade, meus irmãos, sigo dizendo
+        Que felicidade, meus irmãos, sigo cantando
+        Quanta harmonia, amor, verdade e justiça
+        Estão dispostos nesta linha
+        Pra quem sabe dar valor
+
+        Que felicidade é a que existe a cada dia
+        Que felicidade é a paz deste clamor
+        Que felicidade, meus irmãos, senti um dia
+        De fardar pela Rainha
+        Consagrando este amor
+      repetitions: "1-5"
+      received_at: 2020-10-20
+
+    - number: 2
+      title: "Ciranda"
+      offered_to: "Mad. Maria Cristina"
+      text: |
+        A água da chuva
+        Me banhou pelo seu rio
+        Desci pelas cachoeiras
+        Que mamãe Oxum pariu
+
+        Mimosa florzinha
+        De papai Oxalá
+        Esta paz que eu respiro
+        O cantar é que nos dá
+
+        No meio das flores
+        No colo de Nanã
+        Esculpindo neste barro
+        O dia de amanhã
+
+        Semeia a colheita
+        Que um dia há de brotar
+        Se Oxóssi é quem ensina
+        Rei Oxóssi é quem nos dá
+
+        Mamãe natureza
+        Nas redondezas do mar
+        Rodo o mundo em tuas águas
+        Iemanjá vai me levar
+
+        Sereia, princesa
+        Nas pedreiras esplendor
+        Sob a luz da cachoeira
+        Tem morada de Xangô
+
+        Voando no vento
+        Veloz como Iansã
+        Onde tem um olho d’água
+        Corre o vento de mamãe
+
+        Nadando na água
+        No trono do mar
+        Salve a Lua prateada
+        Salve Ogum da Beira-Mar
+
+        Esta linda ciranda
+        Eu deixei pra vós cantar
+        Canta, canta ibeijada
+        No brilho deste luar
+      repetitions: "1-2, 3-4"
+      received_at: 2020-11-02
+
+    - number: 5
+      title: "Amigo"
+      offered_to: "Amanda Amorim"
+      text: |
+        Amigo, amigo
+        Amigo eu tenho sorte
+        Por poder lhe chamar de amigo
+
+        Amigo, amigo
+        Fique firme na estrada
+        Que esta é uma luz de abrigo
+
+        Amigo, amigo
+        Cada dia traz melhores
+        O amanhã é um caminho
+      repetitions: "1-3"
+      received_at: 2020-12-01
+
+    - number: 11
+      title: "Cada passo"
+      text: |
+        Cada passo que dou
+        É um passo no infinito
+        No clarão da lua cheia
+        O vento traz um bom amigo
+      repetitions: "1-2, 3-4"
+      received_at: 2020-12-16
+
+    - number: 12
+      title: "Estrela"
+      text: |
+        Me coloca a estrela
+        Para eu me defender
+        Me coloca a armadura
+        Para eu ir batalhar
+
+        Escudos da luz
+        São estes
+        Que estão prontos para lutar
+      repetitions: "1-4, 5-7"
+      received_at: 2020-12-19
+
+    - number: 13
+      title: "Pequenina"
+      style: "Valsa"
+      text: |
+        Ouço o cantar dos passarinhos
+        Vejo as belezas do oceano
+        Sou pequenina e trago uma história
+        Para mostrar meu reino de glória
+
+        Eu sou riqueza do oceano
+        Eu sou princesa e sigo cantando
+        Tenho presentes para entregar
+        A todos aqueles que vir cantar
+      repetitions: "1-2, 3-4"
+      received_at: 2020-12-19
+
+    - number: 16
+      title: "Era uma vez"
+      text: |
+        Era uma vez, era uma vez
+        O que eu queria aprender
+        O meu povo já me disse
+        Leva tudo de uma vez
+
+        Era uma vez, era uma vez
+        O que morri sem aprender
+        O meu povo já dizia
+        Se morreu levou de vez
+
+        Era uma vez, era uma vez
+        O que eu deixei para vocês
+        Deixei tudo que diziam
+        Desta vez contarei eu
+      repetitions: "1-4"
+      received_at: 2020-12-26
+
+    - number: 18
+      title: "Ouvi dizer"
+      text: |
+        Ouvi dizer
+        Que o mestre avisou
+        Que o tempo todo passa
+        E o amanhã já é de novo
+
+        Mais um mais um
+        Muita gente escolheu
+        O que ao velho não engana
+        E vem um novo amigo meu
+
+        Vou caprichar
+        Nesta nova seleção
+        Vim me apresentar na escola
+        De uma eterna instrução
+
+        O que eu pedi
+        Papai já reconheceu
+        Mandou desde um outro tempo
+        Junto ao bom amigo seu
+      repetitions: "1-2, 3-4"
+      received_at: 2021-07-04
+
+    - number: 19
+      title: "Sempre agradecendo"
+      style: "Valsa"
+      text: |
+        Sempre agradecendo
+        Junto aos meus irmãos
+        Sempre trago esta chave de ouro
+        Gravada em meu coração
+
+        Vou abrindo esta porta
+        Uma missão de lições
+        Entregando o que cabe a mim
+        E recebendo minha coroação
+
+        Mamãezinha chamando
+        Não espero e já vou
+        Ela é quem me dá todo conforto
+        Meu pai me mostrou com grandeza
+
+        Com toda esta força
+        Entendo muito melhor
+        O que devo, mereço, conquisto
+        Com a paz e com o tom do perdão
+      repetitions: "1-2, 3-4"
+      received_at: 2021-09-11
+
+    - number: 20
+      title: "Fogueira"
+      text: |
+        Imaginem o alarde
+        meus irmãos cantando
+        Abrindo os caminhos
+
+        Uma estrela de luz
+        Que pousou na fogueira
+        Chegou meu Padrinho
+
+        Oh que luz tão formosa
+        Uma tarde brilhante
+        De muita alegria
+
+        Pousou no meu peito
+        Me trouxe meu pai
+        Numa paz de algum dia
+      repetitions: "1-3, 4-6"
+      received_at: 2021-09-13
+
+    - number: 21
+      title: "O mar"
+      style: "Valsa"
+      offered_to: Max
+      text: |
+        O mar é um novo mundo
+        Me sinto e acalmo o mar na escuridão
+        Com seu farol a me guiar
+        Lua delicada, raio do coração
+
+        A água é um novo mundo
+        Suas cordas de água tocam meu coração
+        Na harmonia do violão
+        Suas cordas de água tocam meu coração
+      repetitions: "1-2, 3-4"
+      received_at: 2021-09-25
+
+    - number: 22
+      title: "Sempre viva"
+      style: "Valsa"
+      offered_to: Mad. Liberdade
+      text: |
+        Abrir o coração
+        Num auxílio divino
+        É uma flor que apresenta
+        Este estudo fino
+
+        Eu estava longe
+        Pensei em voltar
+        Meu pai quem me trouxe
+        Para aqui cantar
+
+        Voava com o vento
+        Dançava com o mar
+        Ela sempre viva
+        Me ensina a sonhar
+
+        Formosa, mimosa
+        Florzinha de amor
+        Me trouxe do espaço
+        Um pedido aonde estou
+      repetitions: "1-4"
+      received_at: 2021-10-22
+
+    - number: 24
+      title: "Um tesouro"
+      offered_to: Rodrigo Jófili
+      text: |
+        Olha o que eu vou te dizer
+        Olha o que o mestre está fazendo
+        Jesus Cristo avisou
+        O que vinha há muito tempo
+
+        As palavras que disserem
+        Estão vindo enganadas
+        Se não prestarem atenção
+        Na harmonia desta casa
+
+        Amor, verdade e justiça
+        Se apresentam em seguida
+        Que o meu mestre é poderoso
+        Não brinca com a disciplina
+
+        No jardim desta estrada
+        Do império tem um tesouro
+        Não vai brotar julgamento
+        No que a rainha entregou
+
+        O jagube em sua força
+        Vai mostrando a lição
+        Vai sentir a chamada
+        Quem não entrar em apuração
+
+        O meu coração renova
+        De alegria nesta história
+        Por contar com um irmão
+        Com uma paz viva na memória
+
+        Esta paz é uma beleza
+        Multiplica a união
+        Faz crescer a minha fé
+        Ser leal a esta missão
+      repetitions: "1-2, 3-4"
+      received_at: 2021-10-26
+
+    - number: 26
+      title: "Confiar"
+      style: "Valsa"
+      text: |
+        Eu te ensino a confiar
+        Vim nesta canção pra zelar
+        Da tua palavra
+        Do teu pensamento
+
+        Sou eu flor misericordiosa
+        Me apresento numa bela rosa
+        Ditando primores
+        À tua consciência
+
+        Vim te mostrar amor na dor
+        Erguer teu coração criador
+        Tu segues e ganhas
+        O teu firmamento
+      repetitions: "3-4, 1-4"
+      received_at: 2021-11-10
+
+    - number: 27
+      title: "Navegação"
+      text: |
+        Eu peço ao meu São João
+        Eu peço a Virgem da Conceição
+        Que segure forte minha mão
+        Que eu vou entrar nesta navegação
+
+        Eu vou seguindo esta estrela de luz
+        Bem ancorada no meu senhor Jesus
+        Ela tem um destino na mão
+        Vai pro meu peito e alegra o meu coração
+
+        Ela é uma chave de beleza
+        Te abrindo o templo desta fortaleza
+        Eu te dou, eu te dou com amor
+        Saiba ser simples pra viver a imensidão
+
+        As estrelas são uma firmeza
+        Um tesouro pra guiar a fortaleza
+        A fortaleza é o teu coração
+        Zela com carinho e vai brotar a atenção
+      repetitions: "1-2, 3-4"
+      received_at: 2021-11-24
+
+    - number: 28
+      title: "Zelando pelas flores"
+      text: |
+        Mãezinha eu vou te escutar
+        Zelando pelas flores sei que vós vem me zelar
+        Mãezinha eu vou te escutar
+        Zelando pelas flores sei que vós vem me saudar
+      repetitions: "1-2, 3-4"
+      received_at: 2022-01-20
+
+    - number: 32
+      title: "Nova semente"
+      style: "Valsa"
+      offered_to: Flávia Santana
+      text: |
+        Uns se seguram de cá
+        Outros se seguram de lá
+        Nesse véu por entre os mundos
+        Eu vou me apresentar
+
+        Uma nova semente brotou
+        Se segure nesse amor
+        Tudo vem da mãe soberana
+        E aqui se passa com vigor
+
+        Tudo que aqui foi aberto
+        Se correu para enxergar
+        Mais do mesmo de muita importância
+        Com os meus irmãos me ligar
+
+        A segurança pra se firmar no tempo
+        Está para além da matéria
+        Se ligando em tudo no espaço
+        A doçura se soma na fé
+      repetitions: "1-2, 3-4"
+      received_at: 2022-10-21
+
+    - number: 36
+      title: "O barquinho"
+      text: |
+        A presença deste brilho
+        Sempre traz o seu sustento
+        A certeza que balança
+        Arde no teu sofrimento
+
+        Vai saindo pouco a pouco
+        E lá se vai pela tangente
+        Segue firme no barquinho
+        Ele vem salvando a gente
+
+        Aliviando os teus passos
+        Lá se vai a ilusão
+        O princípio dessas ondas
+        É a rosa do meu coração
+
+        Assim peço meu perdão
+        Levando a bandeira da paz
+        Toda onda que quebranta
+        Eleva e aprendo algo mais
+      repetitions: "1-4"
+      received_at: 2023-02-14
+
+    - number: 54
+      title: "Serena"
+      offered_to: "Helena Borges"
+      text: |
+        Serena serenou
+        Serenou serena
+        Na linha de umbanda
+        Vamos todos cirandar
+
+        Nesta linda ciranda
+        Da gira da umbanda
+        Viemos de mansinho
+        Para a todos serenar
+      repetitions: "1-2, 3-4"
+      received_at: 2023-10-07
+
+    - number: 66
+      title: "A calma"
+      style: "Valsa"
+      text: |
+        A calma e paz do meu pai Oxalá
+        A calma e paz do meu pai Oxalá
+
+        Vim nas campinas, vim pra viajar
+        Serenando o mais que a vida dirá
+        Vou colher flores para festejar
+        Florescer as matas pelo meu cantar
+      repetitions: "1-2"
+      received_at: 2023-12-15
+
+    - number: 68
+      title: "Caminheiro"
+      offered_to: "Sávio"
+      text: |
+        Caminheiro caminhei
+        Caminheiro eu sou assim
+        Sou eu quem estou chamando
+        Vós pra pertinho de mim
+
+        Canoeiro vai na frente
+        Nossa Senhora na proa
+        Eu chamo os meus irmãos
+        Para ver uma coisa boa
+
+        Se ligando em coisa boa
+        Vamos vencer todos juntos
+        Ver a coisa ficar boa
+        Crescendo seu próprio rumo
+
+        Vamos viver mais de perto
+        Com meus irmãos se ligando
+        Cada um atento e esperto
+        No que vai se amostrando
+
+        Vamos dizer com a verdade
+        Vamos viver com harmonia
+        Sou a corte da justiça
+        No baile do amor
+      repetitions: "1-4"
+      received_at: 2023-12-21
+
+    - number: 74
+      title: "Bem estimados"
+      text: |
+        Olha os bem estimados
+        Bem estimados
+        Olhe por ti mesmo
+        E estarás ocupado
+
+        Olha os bem estimados
+        Bem estimados
+        Vai andando com Deus
+        Que caminha ao teu lado
+      repetitions: "1-8"
+      received_at: 2024-01-15
+
+    - number: 75
+      title: "Ligar em Deus"
+      offered_to: "Nitai"
+      text: |
+        Eu vou me ligar em Deus
+        Com Ele é que eu vou subir
+        Junto a soberana mãe
+        É quem está juntinho a mim
+
+        Nossa soberana mãe
+        Vós nos faz todos inocentes
+        Defendei os vossos filhos
+        De todo mal que à Terra desce
+
+        O mar cresce nas alturas
+        E me leva a meu Pai
+        Com as águas de mamãe
+        Me elevo e levo mais
+      repetitions: "1-2, 3-4"
+      received_at: 2024-01-26
+
+    - number: 77
+      title: "Matinada"
+      offered_to: "Alane"
+      text: |
+        Eu amparo fingimento com amor
+        Aqui respaldo e acredito no que sou
+        Eu sou sublime, soberano amor
+        Minha semente eu doei para dar flor
+
+        Sob a lua nova daqui da Terra irradia
+        Uma faísca de inteiro resplendor
+        Eu não confundo quem está doente
+        Para receber uma palavra de amor
+
+        Flores brancas chegam voando do espaço
+        Para quem quer ver os anjos arrodear
+        Tocar uma matinada incandescente
+        Para florescer a santa cruz de todos nós
+      repetitions: "1-2, 3-4"
+      received_at: 2024-01-29
+
+    - number: 79
+      title: "Escala"
+      style: "Valsa"
+      offered_to: "Kézia Marinho"
+      text: |
+        Já dá para enxergar
+        Que eu sou luz, eu sou amor
+        Voz de discernimento
+        Na fé e na dor
+
+        Conheci esta escola
+        Me entreguei para amar
+        Escalando esta estrada
+        Que dá no Mapiá
+      repetitions: "1-4"
+      received_at: 2024-02-26
