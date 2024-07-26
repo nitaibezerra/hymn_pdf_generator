@@ -1,27 +1,23 @@
-# README.md
-
-```markdown
 # Hymn PDF Generator
 
-This project is used to generate PDFs for hymns. It uses the Python programming language and the `poetry` package manager for dependency management.
-
-## Prerequisites
-
-- Python 3.8 or higher
-- Poetry
+This project is used to generate PDFs for hymns. It uses the Python
+programming language and the `poetry` package manager for dependency
+management.
 
 ## Installation
 
-1. Install Poetry: Poetry is a tool for dependency management and packaging in Python. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you.
+1. Install Poetry: Poetry is a tool for dependency management and
+packaging in Python. It allows you to declare the libraries your project
+depends on and it will manage (install/update) them for you.
 
 ```bash
-curl -sSL https://install.python-poetry.org | python -
+pip install poetry
 ```
 
-2. Clone this repository. Replace `[yourusername]` by your Github user name:
+2. Clone this repository:
 
 ```bash
-git clone https://github.com/[yourusername]/hymn_pdf_generator.git
+git clone https://github.com/nitaibezerra/hymn_pdf_generator.git
 ```
 
 3. Navigate to the project directory:
@@ -38,14 +34,12 @@ poetry install
 
 ## Usage
 
-1. Enter the hymn_pdf_generator directory:
+1. Run the pdf_generator.py script under the poetry environment. Provide
+the YAML file path as argument:
 
 ```bash
-cd hymn_pdf_generator
+poetry run python hymn_pdf_generator/main.py example/selecao_aniversario_ingrid.yaml
 ```
 
-2. Run the pdf_generator.py script:
-
-```bash
-python pdf_generator.py
-```
+The generated PDF will be created at the same place of the provided YAML.
+In this case at `example/selecao_aniversario_ingrid.pdf`.
