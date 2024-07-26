@@ -85,64 +85,6 @@ class HymnPDFGenerator(Configuration):
         """
         Set up custom paragraph styles.
         """
-        self.title_style = ParagraphStyle(
-            'TitleStyle',
-            parent=self.styles['Title'],
-            fontSize=self.title_font_size,
-            fontName=self.font_name,
-            leading=20,
-            spaceAfter=0
-        )
-
-        self.body_style = ParagraphStyle(
-            'BodyStyle',
-            parent=self.styles['BodyText'],
-            fontName=self.font_name,
-            fontSize=self.default_body_font_size,
-            leading=16,  # Increased line spacing
-            spaceAfter=0.12 * inch
-        )
-
-        self.details_on_top_style = ParagraphStyle(
-            'RightAlignStyle',
-            parent=self.styles['Normal'],
-            fontName=self.font_name,
-            fontSize=12,
-            alignment=2,  # Right align
-            leading=14,
-            spaceAfter=8
-        )
-
-        self.received_at_style = ParagraphStyle(
-            'ReceivedAtStyle',
-            parent=self.styles['Normal'],
-            fontName=self.font_name,
-            fontSize=10,
-            alignment=2,  # Center align
-            leading=12,
-            spaceBefore=20
-        )
-
-        self.davi_star_style = ParagraphStyle(
-            'DaviStarStyle',
-            parent=self.styles['Normal'],
-            fontName=self.font_name,
-            fontSize=14,
-            alignment=TA_CENTER,
-            spaceAfter=0.2 * inch
-        )
-
-        self.symbols_style = ParagraphStyle(
-            'SymbolsStyle',
-            parent=self.styles['Normal'],
-            fontName='DejaVuSans',
-            fontSize=14,
-            alignment=TA_CENTER,
-            textColor='black',
-            spaceBefore=0.3 * inch,
-            spaceAfter=0.2 * inch
-        )
-
         self.cover_intro_style = ParagraphStyle(
             'CoverIntroStyle',
             parent=self.styles['Title'],
@@ -168,6 +110,64 @@ class HymnPDFGenerator(Configuration):
             fontSize=24,
             alignment=TA_CENTER,
             spaceAfter=24
+        )
+
+        self.title_style = ParagraphStyle(
+            'TitleStyle',
+            parent=self.styles['Title'],
+            fontSize=self.title_font_size,
+            fontName=self.font_name,
+            leading=20,
+            spaceAfter=0
+        )
+
+        self.details_on_top_style = ParagraphStyle(
+            'RightAlignStyle',
+            parent=self.styles['Normal'],
+            fontName=self.font_name,
+            fontSize=10,
+            alignment=2,  # Right align
+            leading=12,
+            spaceAfter=8
+        )
+
+        self.body_style = ParagraphStyle(
+            'BodyStyle',
+            parent=self.styles['BodyText'],
+            fontName=self.font_name,
+            fontSize=self.default_body_font_size,
+            leading=16,  # Increased line spacing
+            spaceAfter=0.12 * inch
+        )
+
+        self.davi_star_style = ParagraphStyle(
+            'DaviStarStyle',
+            parent=self.styles['Normal'],
+            fontName=self.font_name,
+            fontSize=14,
+            alignment=TA_CENTER,
+            spaceAfter=0.2 * inch
+        )
+
+        self.symbols_style = ParagraphStyle(
+            'SymbolsStyle',
+            parent=self.styles['Normal'],
+            fontName='DejaVuSans',
+            fontSize=14,
+            alignment=TA_CENTER,
+            textColor='black',
+            spaceBefore=0.3 * inch,
+            spaceAfter=0.2 * inch
+        )
+
+        self.received_at_style = ParagraphStyle(
+            'ReceivedAtStyle',
+            parent=self.styles['Normal'],
+            fontName=self.font_name,
+            fontSize=10,
+            alignment=2,  # Center align
+            leading=12,
+            spaceBefore=20
         )
 
     def create_pdf(self):
