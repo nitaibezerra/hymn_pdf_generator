@@ -1,4 +1,3 @@
-
 from typing import List
 
 from config import Configuration
@@ -12,6 +11,7 @@ from reportlab.pdfgen import canvas
 from reportlab.platypus import (
     Flowable,
     HRFlowable,
+    KeepTogether,
     PageBreak,
     Paragraph,
     SimpleDocTemplate,
@@ -256,7 +256,7 @@ class HymnPDFGenerator(Configuration):
         elements = []
         title = f"{idx:02d}. {hymn.title} ({hymn.number:02d})"
         elements.append(Paragraph(title, self.title_style))
-        elements.append(HRFlowable(width="100%", thickness=1, color="black", spaceAfter=0))
+        elements.append(HRFlowable(width="100%", thickness=1, color="black", spaceAfter=2))
         return elements
 
     def _build_details_on_top(self, hymn: Hymn) -> List[Paragraph]:
@@ -289,7 +289,7 @@ class HymnPDFGenerator(Configuration):
             ]
         else:
             return [
-                Spacer(1, 14 * resize_factor + 8)
+                Spacer(1, 12 * resize_factor + 8)
             ]
 
     def _build_body_paragraphs(self, hymn: Hymn) -> List[Paragraph]:
@@ -359,6 +359,20 @@ class HymnPDFGenerator(Configuration):
             elements.append(Paragraph(hymn.received_at.strftime("(%d/%m/%Y)"), self.received_at_style))
         return elements
 
+    def _keep_together_elements(self, body_paragraphs: List[Paragraph], last_elements: List[Paragraph]) -> List[Paragraph]:
+        """
+        Ensure the last elements are kept together with the last body paragraph.
+
+        :param body_paragraphs: The body paragraphs of the hymn.
+        :param last_elements: The elements to be kept together with the last body paragraph.
+        :return: A list of paragraphs wrapped in KeepTogether.
+        """
+        elements = []
+        elements.extend(KeepTogether(paragraph) for paragraph in body_paragraphs[:-1])
+        elements.append(KeepTogether([body_paragraphs[-1], *last_elements]))
+        return elements
+
+
     def _build_elements(self) -> List[Paragraph]:
         """
         Build the PDF elements from the hymn content.
@@ -373,9 +387,14 @@ class HymnPDFGenerator(Configuration):
             elements.extend(self._build_title_and_header(idx, hymn))
             elements.extend(self._build_details_on_top(hymn))
             elements.extend(self._build_vertical_lines(hymn))
-            elements.extend(self._build_body_paragraphs(hymn))
-            elements.append(self._build_after_hymn_symbol(idx))
-            elements.extend(self._build_received_at(hymn))
+
+            body_paragraphs = self._build_body_paragraphs(hymn)
+            last_elements = [
+                self._build_after_hymn_symbol(idx),
+                *self._build_received_at(hymn)
+            ]
+            elements.extend(self._keep_together_elements(body_paragraphs, last_elements))
+
             elements.append(PageBreak())
 
         return elements
