@@ -335,6 +335,18 @@ class HymnPDFGenerator(Configuration):
         symbols = f"{sun_symbol} {moon_symbol} {star_symbol}"
         return Paragraph(symbols, self.symbols_style)
 
+    def _build_after_hymn_symbol(self, idx: int) -> Paragraph:
+        """
+        Pick the appropriate symbol to append based on the index.
+
+        :param idx: The index of the hymn.
+        :return: A Paragraph element containing the chosen symbol.
+        """
+        if idx % 3 != 0:
+            return self._build_davi_star()
+        else:
+            return self._build_additional_symbols()
+
     def _build_received_at(self, hymn: Hymn) -> List[Paragraph]:
         """
         Build the received_at element for a hymn.
@@ -362,10 +374,7 @@ class HymnPDFGenerator(Configuration):
             elements.extend(self._build_details_on_top(hymn))
             elements.extend(self._build_vertical_lines(hymn))
             elements.extend(self._build_body_paragraphs(hymn))
-            if idx % 3 != 0:
-                elements.append(self._build_davi_star())
-            else:
-                elements.append(self._build_additional_symbols())
+            elements.append(self._build_after_hymn_symbol(idx))
             elements.extend(self._build_received_at(hymn))
             elements.append(PageBreak())
 
