@@ -185,7 +185,6 @@ class HymnPDFGenerator(Configuration):
 
         elements = self._build_elements()
         doc.build(elements, canvasmaker=PageNumCanvas)
-        # doc.build(elements)
 
     def _build_vertical_lines(self, hymn: Hymn) -> List[VerticalLine]:
         """
@@ -361,15 +360,31 @@ class HymnPDFGenerator(Configuration):
 
     def _keep_together_elements(self, body_paragraphs: List[Paragraph], last_elements: List[Paragraph]) -> List[Paragraph]:
         """
-        Ensure the last elements are kept together with the last body paragraph.
+        Ensure the last elements are kept together with the last body paragraphs according to specific rules.
 
         :param body_paragraphs: The body paragraphs of the hymn.
-        :param last_elements: The elements to be kept together with the last body paragraph.
+        :param last_elements: The elements to be kept together with the last body paragraphs.
         :return: A list of paragraphs wrapped in KeepTogether.
         """
         elements = []
-        elements.extend(KeepTogether(paragraph) for paragraph in body_paragraphs[:-1])
-        elements.append(KeepTogether([body_paragraphs[-1], *last_elements]))
+        rules = {
+            5: 2,
+            6: 3,
+            7: 3,
+            8: 2,
+            9: 3,
+        }
+        default_keep_together = 1
+
+        num_paragraphs = len(body_paragraphs)
+        keep_together_count = rules.get(num_paragraphs, default_keep_together)
+
+        if num_paragraphs > keep_together_count:
+            elements.extend(KeepTogether(paragraph) for paragraph in body_paragraphs[:-keep_together_count])
+            elements.append(KeepTogether(body_paragraphs[-keep_together_count:] + last_elements))
+        else:
+            elements.append(KeepTogether(body_paragraphs + last_elements))
+
         return elements
 
 
