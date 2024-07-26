@@ -1,20 +1,14 @@
-import os
-import sys
-from dataclasses import dataclass, field
-from typing import List, Optional
 
-import yaml
+from typing import List
+
+from config import Configuration
+from models import Hymn
 from reportlab.lib.enums import TA_CENTER
-from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import inch
 from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.pdfmetrics import stringWidth
-
-# Import the required font
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
-from reportlab.pdfgen.canvas import Canvas
 from reportlab.platypus import (
     Flowable,
     HRFlowable,
@@ -23,65 +17,11 @@ from reportlab.platypus import (
     SimpleDocTemplate,
     Spacer,
 )
-from reportlab.platypus.flowables import HRFlowable
 
 from hymn_pdf_generator.repetition_bar_allocator import LevelAllocator
 
 # Register the DejaVu Sans font
 pdfmetrics.registerFont(TTFont('DejaVuSans', 'DejaVuSans.ttf'))
-
-
-
-@dataclass
-class Configuration:
-    """Constant values used in multiple classes."""
-    pagesize: tuple = field(default=(4 * inch, 6 * inch))
-    margin: float = field(default=0.5 * inch)
-    font_name: str = field(default='Times-Roman')
-    title_font_size: int = field(default=14)
-    default_body_font_size: int = field(default=14)
-
-
-@dataclass
-class MetaHymn:
-    """
-    Meta class representing a hymn. It's necessary so the Hymn is
-    composed by Configuration and MetaHymn in this order since
-    Configuration has default properties and can't be after non-default
-    properties.
-    """
-    number: int
-    title: str
-    style: Optional[str]
-    offered_to: Optional[str]
-    extra_instructions: Optional[str]
-    text: str
-    repetitions: Optional[str]
-    received_at: Optional[str]
-
-
-@dataclass
-class Hymn(Configuration, MetaHymn):
-    """
-    Data class representing a hymn.
-    """
-    @property
-    def adjusted_font_size(self) -> int:
-        """
-        Calculate the adjusted font size to fit the text within the given width.
-
-        :return: The adjusted font size.
-        """
-        font_size = self.default_body_font_size
-        max_width = self.pagesize[0] - 2 * self.margin
-        max_width -= 14  # Adjust for the leading
-
-        for line in self.text.split("\n"):
-            while stringWidth(line, self.font_name, font_size) > max_width and font_size > 6:
-                font_size -= 1
-
-        return font_size
-
 
 class VerticalLine(Flowable):
     def __init__(self, x, y_start, y_end, thickness=0.7):
@@ -108,7 +48,7 @@ class PageNumCanvas(canvas.Canvas, Configuration):
     def draw_page_number(self):
         page_num = self.getPageNumber() - 1  # Subtract 1 for the cover page
         if page_num > 0:
-            self.setFont(self.font_name, self.default_body_font_size)
+            self.setFont(self.font_name, self.pagenumber_font_size)
             self.drawRightString(self.pagesize[0] - self.margin,
                                  self.margin,
                                  str(page_num))
@@ -430,44 +370,3 @@ class HymnPDFGenerator(Configuration):
             elements.append(PageBreak())
 
         return elements
-
-
-def main(yaml_path: str):
-    # Load hymns from YAML file
-    with open(yaml_path, 'r') as file:
-        data = yaml.safe_load(file)
-
-    hymn_book = data['hymn_book']
-
-    intro_name = hymn_book['intro_name']
-    name = hymn_book['name']
-    owner = hymn_book['owner']
-
-    hymns = [
-        Hymn(
-            number=hymn.get('number'),
-            title=hymn.get('title'),
-            style=hymn.get('style'),
-            offered_to=hymn.get('offered_to'),
-            extra_instructions=hymn.get('extra_instructions'),
-            text=hymn.get('text'),
-            repetitions=hymn.get('repetitions'),
-            received_at=hymn.get('received_at')
-        )
-        for hymn in hymn_book['hymns']
-    ]
-
-    # Output filename
-    output_filename = os.path.splitext(yaml_path)[0] + ".pdf"
-
-    # Create the PDF
-    generator = HymnPDFGenerator(hymns, output_filename, intro_name, name, owner)
-    generator.create_pdf()
-
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python script.py <path_to_yaml>")
-        sys.exit(1)
-
-    yaml_path = sys.argv[1]
-    main(yaml_path)
