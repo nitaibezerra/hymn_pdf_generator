@@ -32,7 +32,15 @@ def main(yaml_path: str):
 
     output_filename = os.path.splitext(yaml_path)[0] + ".pdf"
 
-    generator = HymnPDFGenerator(hymns, output_filename, intro_name, name, owner)
+    cover_image_path = os.path.join(os.path.dirname(yaml_path), 
+                                    hymn_book['cover_image_path'])
+     
+    generator = HymnPDFGenerator(hymns, 
+                                 output_filename, 
+                                 intro_name, 
+                                 name, 
+                                 owner, 
+                                 cover_image_path)
     generator.create_pdf()
 
 if __name__ == "__main__":

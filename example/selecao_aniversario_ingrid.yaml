@@ -5,6 +5,7 @@ hymn_book:
     &
     Morada Divina
   owner: "Ingrid Vital"
+  cover_image_path: capa_hinario_ingrid.jpg
   hymns:
     - number: 62
       title: "Disciplina"
