@@ -5,13 +5,14 @@ hymn_book:
     &
     Morada Divina
   owner: "Ingrid Vital"
+  cover_image_path: capa_hinario_ingrid.jpg
   hymns:
     - number: 62
       title: "Disciplina"
       text: |
         Santa Maria
         O caminho da disciplina
-        Vem chegando noite e dia
+        Vem chegandcapa_hinario_ingrid.jpgo noite e dia
         Como a luz de um clarão
 
         Eu peço força

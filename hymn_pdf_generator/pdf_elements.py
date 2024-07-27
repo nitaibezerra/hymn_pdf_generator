@@ -16,7 +16,10 @@ from reportlab.platypus import (
     Paragraph,
     SimpleDocTemplate,
     Spacer,
+    Frame
 )
+from reportlab.platypus import Image, PageTemplate, BaseDocTemplate
+from reportlab.lib.utils import ImageReader
 
 from hymn_pdf_generator.repetition_bar_allocator import LevelAllocator
 
@@ -63,7 +66,7 @@ class HymnPDFGenerator(Configuration):
     A class to generate a PDF for a given hymn.
     """
 
-    def __init__(self, hymns: List[Hymn], filename: str, intro_name: str, name: str, owner: str):
+    def __init__(self, hymns: List[Hymn], filename: str, intro_name: str, name: str, owner: str, cover_image_path: str):
         """
         Initialize the HymnPDFGenerator with hymns, output filename, and cover page details.
 
@@ -72,12 +75,14 @@ class HymnPDFGenerator(Configuration):
         :param intro_name: Introduction name for the cover page.
         :param name: Name for the cover page.
         :param owner: Owner name for the cover page.
+        :param cover_image_path: Background image for the cover page.
         """
         self.hymns = hymns
         self.filename = filename
         self.intro_name = intro_name
         self.name = name
         self.owner = owner
+        self.cover_image_path = cover_image_path
         self.styles = getSampleStyleSheet()
         self._setup_styles()
 
@@ -183,8 +188,55 @@ class HymnPDFGenerator(Configuration):
             bottomMargin=self.margin
         )
 
+        # creating a frame for the template
+        frame = Frame(self.margin, 
+                      self.margin, 
+                      self.pagesize[0] - 2 * self.margin, 
+                      self.pagesize[1] - 2 * self.margin, 
+                      id='normal')
+
+        template = PageTemplate(id='background', 
+                                frames=frame, 
+                                onPage=self._background_image)
+        doc.addPageTemplates([template])
+
         elements = self._build_elements()
         doc.build(elements, canvasmaker=PageNumCanvas)
+
+    def _background_image(self, canvas, doc):
+        """
+        Add background image to the canvas.
+        """
+        img = ImageReader(self.cover_image_path)
+        img_width, img_height = img.getSize()
+
+        # Calculates aspect ratio of image and document
+        aspect = img_width / float(img_height)
+        page_width, page_height = self.pagesize
+
+        # Sets the width and height according to the aspect ratio
+        if aspect > 1:
+            width = page_width
+            height = width / aspect
+        else:
+            height = page_height
+            width = height * aspect
+
+        # Position the image in the center of the page
+        x = (page_width - width) / 2
+        y = (page_height - height) / 2
+
+        canvas.drawImage(self.cover_image_path, 
+                         x, 
+                         y, 
+                         width=width, 
+                         height=height, 
+                         preserveAspectRatio=True, 
+                         mask='auto')
+
+        # Adds a semi-transparent rectangle over the image
+        canvas.setFillColorRGB(1, 1, 1, alpha=0.5)  # Semi-transparent white (50% opacity)
+        canvas.rect(0, 0, page_width, page_height, fill=1)
 
     def _build_vertical_lines(self, hymn: Hymn) -> List[VerticalLine]:
         """
