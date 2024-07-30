@@ -240,38 +240,45 @@ class HymnPDFGenerator(Configuration):
 
     def _build_vertical_lines(self, hymn: Hymn) -> List[VerticalLine]:
         """
-        Create vertical line elements based on hymn repetitions.
+        Create vertical line elements based on hymn bars repetitions.
 
         :param hymn: The hymn instance.
         :return: A list of VerticalLine elements.
         """
         elements = []
         allocator = RepetitionBarXAxisAllocator()
-        line_positions = allocator.get_entries_with_levels(hymn.repetitions)
+        bar_positions = allocator.get_entries_with_levels(hymn.repetitions)
 
         resize_factor = hymn.adjusted_font_size / self.default_body_font_size
+        def resize(number: int) -> float:
+            """Adjust in casa the font was resized to fit in page"""
+            return number * resize_factor
 
-        y_margin = -8 + (-4 * resize_factor)
-        one_line_height = 7 * resize_factor
-        space_between_lines = 9 * resize_factor
-        x_levels_distance = 6 * resize_factor
+        # Y padding
+        y_padding = -8 + resize(-4)
+        # X distance between bars
+        x_bars_distance = resize(6)
+        # Bar hight for one line
+        one_line = resize(7)
+        # Distance between two lines
+        between_lines = resize(9)
 
-        for line in line_positions:
-            start = line['start'] - 1
-            end = line['end'] - 1
-            level = line['level']
+        for bar in bar_positions:
+            start = bar['start'] - 1
+            end = bar['end'] - 1
+            level = bar['level']
 
             y_start = (
-                y_margin
-                - (start * one_line_height
-                   + start * space_between_lines)
+                y_padding
+                - (start * one_line
+                   + start * between_lines)
             )
             y_end = (
-                y_margin
-                - ((end + 1) * one_line_height
-                   + end * space_between_lines)
+                y_padding
+                - ((end + 1) * one_line
+                   + end * between_lines)
             )
-            x_position = -(level * x_levels_distance)
+            x_position = -(level * x_bars_distance)
 
             elements.append(
                 VerticalLine(x_position, y_start, y_end))
