@@ -5,23 +5,23 @@ from models import Hymn
 from reportlab.lib.enums import TA_CENTER
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import inch
+from reportlab.lib.utils import ImageReader
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 from reportlab.platypus import (
     Flowable,
+    Frame,
     HRFlowable,
     KeepTogether,
     PageBreak,
+    PageTemplate,
     Paragraph,
     SimpleDocTemplate,
     Spacer,
-    Frame
 )
-from reportlab.platypus import Image, PageTemplate, BaseDocTemplate
-from reportlab.lib.utils import ImageReader
 
-from hymn_pdf_generator.repetition_bar_allocator import LevelAllocator
+from hymn_pdf_generator.repetition_bar_allocator import RepetitionBarXAxisAllocator
 
 # Register the DejaVu Sans font
 pdfmetrics.registerFont(TTFont('DejaVuSans', 'DejaVuSans.ttf'))
@@ -189,14 +189,14 @@ class HymnPDFGenerator(Configuration):
         )
 
         # creating a frame for the template
-        frame = Frame(self.margin, 
-                      self.margin, 
-                      self.pagesize[0] - 2 * self.margin, 
-                      self.pagesize[1] - 2 * self.margin, 
+        frame = Frame(self.margin,
+                      self.margin,
+                      self.pagesize[0] - 2 * self.margin,
+                      self.pagesize[1] - 2 * self.margin,
                       id='normal')
 
-        template = PageTemplate(id='background', 
-                                frames=frame, 
+        template = PageTemplate(id='background',
+                                frames=frame,
                                 onPage=self._background_image)
         doc.addPageTemplates([template])
 
@@ -226,12 +226,12 @@ class HymnPDFGenerator(Configuration):
         x = (page_width - width) / 2
         y = (page_height - height) / 2
 
-        canvas.drawImage(self.cover_image_path, 
-                         x, 
-                         y, 
-                         width=width, 
-                         height=height, 
-                         preserveAspectRatio=True, 
+        canvas.drawImage(self.cover_image_path,
+                         x,
+                         y,
+                         width=width,
+                         height=height,
+                         preserveAspectRatio=True,
                          mask='auto')
 
         # Adds a semi-transparent rectangle over the image
@@ -246,34 +246,35 @@ class HymnPDFGenerator(Configuration):
         :return: A list of VerticalLine elements.
         """
         elements = []
-        allocator = LevelAllocator()
+        allocator = RepetitionBarXAxisAllocator()
         line_positions = allocator.get_entries_with_levels(hymn.repetitions)
 
         resize_factor = hymn.adjusted_font_size / self.default_body_font_size
 
-        base_y_start = -8 + (-4 * resize_factor)
+        y_margin = -8 + (-4 * resize_factor)
         one_line_height = 7 * resize_factor
         space_between_lines = 9 * resize_factor
-        levels_distance = 6 * resize_factor
+        x_levels_distance = 6 * resize_factor
 
         for line in line_positions:
-            start_line = line['start'] - 1
-            end_line = line['end'] - 1
+            start = line['start'] - 1
+            end = line['end'] - 1
             level = line['level']
 
             y_start = (
-                base_y_start
-                - (start_line * one_line_height
-                   + start_line * space_between_lines)
+                y_margin
+                - (start * one_line_height
+                   + start * space_between_lines)
             )
             y_end = (
-                base_y_start
-                - (end_line * one_line_height
-                   + end_line * space_between_lines + one_line_height)
+                y_margin
+                - ((end + 1) * one_line_height
+                   + end * space_between_lines)
             )
+            x_position = -(level * x_levels_distance)
 
             elements.append(
-                VerticalLine(-(level * levels_distance), y_start, y_end))
+                VerticalLine(x_position, y_start, y_end))
 
         return elements
 
@@ -424,7 +425,7 @@ class HymnPDFGenerator(Configuration):
             6: 3,
             7: 3,
             8: 2,
-            9: 3,
+            9: 2,
         }
         default_keep_together = 1
 
