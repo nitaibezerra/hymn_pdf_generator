@@ -44,3 +44,31 @@ class Hymn(Configuration, MetaHymn):
                 font_size -= 1
 
         return font_size
+
+    def count_blank_lines(self, start_line, end_line) -> int:
+        """
+        Count the number of blank lines between the start and end line,
+        excluding blank lines when determining the end_line.
+
+        :param start_line: The start line starting by 0.
+        :param end_line: The end line starting by 0.
+        :return: The number of blank lines.
+        """
+        lines = self.text.split("\n")
+        non_blank_line_count = 0
+        actual_end_line = start_line
+
+        # Find the actual end line index considering only non-blank lines
+        for i, line in enumerate(lines[start_line:], start=start_line):
+            if line.strip():
+                non_blank_line_count += 1
+            if non_blank_line_count > end_line:
+                actual_end_line = i
+                break
+            actual_end_line = i
+
+        # Count blank lines in the range
+        return sum(
+            1 for line in lines[start_line:actual_end_line + 1]
+            if not line.strip()
+        )
