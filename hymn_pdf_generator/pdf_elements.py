@@ -250,7 +250,7 @@ class HymnPDFGenerator(Configuration):
         bar_positions = allocator.get_entries_with_levels(hymn.repetitions)
 
         resize_factor = hymn.adjusted_font_size / self.default_body_font_size
-        def resize(number: int) -> float:
+        def resize(number: float) -> float:
             """Adjust in casa the font was resized to fit in page"""
             return number * resize_factor
 
@@ -260,23 +260,32 @@ class HymnPDFGenerator(Configuration):
         x_bars_distance = resize(6)
         # Bar hight for one line
         one_line = resize(7)
+        # Bar hight for one blank line
+        one_blank_line = resize(8.5)
         # Distance between two lines
         between_lines = resize(9)
 
         for bar in bar_positions:
-            start = bar['start'] - 1
-            end = bar['end'] - 1
+            start = bar['start'] - 1  # Start from 0
+            end = bar['end'] - 1  # Start from 0
             level = bar['level']
 
+            blanks_before = hymn.count_blank_lines(0, start)
+            blanks_up_to_end = hymn.count_blank_lines(0, end)
+
+            # Calculate the bar vertical start and end positions
             y_start = (
                 y_padding
                 - (start * one_line
                    + start * between_lines)
+                - (blanks_before * one_blank_line)
             )
+
             y_end = (
                 y_padding
                 - ((end + 1) * one_line
                    + end * between_lines)
+                - (blanks_up_to_end * one_blank_line)
             )
             x_position = -(level * x_bars_distance)
 
