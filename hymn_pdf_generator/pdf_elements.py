@@ -5,23 +5,23 @@ from models import Hymn
 from reportlab.lib.enums import TA_CENTER
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import inch
+from reportlab.lib.utils import ImageReader
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 from reportlab.platypus import (
     Flowable,
+    Frame,
     HRFlowable,
     KeepTogether,
     PageBreak,
+    PageTemplate,
     Paragraph,
     SimpleDocTemplate,
     Spacer,
-    Frame
 )
-from reportlab.platypus import Image, PageTemplate, BaseDocTemplate
-from reportlab.lib.utils import ImageReader
 
-from hymn_pdf_generator.repetition_bar_allocator import LevelAllocator
+from hymn_pdf_generator.repetition_bar_allocator import RepetitionBarXAxisAllocator
 
 # Register the DejaVu Sans font
 pdfmetrics.registerFont(TTFont('DejaVuSans', 'DejaVuSans.ttf'))
@@ -189,14 +189,14 @@ class HymnPDFGenerator(Configuration):
         )
 
         # creating a frame for the template
-        frame = Frame(self.margin, 
-                      self.margin, 
-                      self.pagesize[0] - 2 * self.margin, 
-                      self.pagesize[1] - 2 * self.margin, 
+        frame = Frame(self.margin,
+                      self.margin,
+                      self.pagesize[0] - 2 * self.margin,
+                      self.pagesize[1] - 2 * self.margin,
                       id='normal')
 
-        template = PageTemplate(id='background', 
-                                frames=frame, 
+        template = PageTemplate(id='background',
+                                frames=frame,
                                 onPage=self._background_image)
         doc.addPageTemplates([template])
 
@@ -226,12 +226,12 @@ class HymnPDFGenerator(Configuration):
         x = (page_width - width) / 2
         y = (page_height - height) / 2
 
-        canvas.drawImage(self.cover_image_path, 
-                         x, 
-                         y, 
-                         width=width, 
-                         height=height, 
-                         preserveAspectRatio=True, 
+        canvas.drawImage(self.cover_image_path,
+                         x,
+                         y,
+                         width=width,
+                         height=height,
+                         preserveAspectRatio=True,
                          mask='auto')
 
         # Adds a semi-transparent rectangle over the image
@@ -240,40 +240,57 @@ class HymnPDFGenerator(Configuration):
 
     def _build_vertical_lines(self, hymn: Hymn) -> List[VerticalLine]:
         """
-        Create vertical line elements based on hymn repetitions.
+        Create vertical line elements based on hymn bars repetitions.
 
         :param hymn: The hymn instance.
         :return: A list of VerticalLine elements.
         """
         elements = []
-        allocator = LevelAllocator()
-        line_positions = allocator.get_entries_with_levels(hymn.repetitions)
+        allocator = RepetitionBarXAxisAllocator()
+        bar_positions = allocator.get_entries_with_levels(hymn.repetitions)
 
         resize_factor = hymn.adjusted_font_size / self.default_body_font_size
+        def resize(number: float) -> float:
+            """Adjust in casa the font was resized to fit in page"""
+            return number * resize_factor
 
-        base_y_start = -8 + (-4 * resize_factor)
-        one_line_height = 7 * resize_factor
-        space_between_lines = 9 * resize_factor
-        levels_distance = 6 * resize_factor
+        # Y padding
+        y_padding = -8 + resize(-4)
+        # X distance between bars
+        x_bars_distance = resize(6)
+        # Bar hight for one line
+        one_line = resize(7)
+        # Bar hight for one blank line
+        one_blank_line = resize(8.5)
+        # Distance between two lines
+        between_lines = resize(9)
 
-        for line in line_positions:
-            start_line = line['start'] - 1
-            end_line = line['end'] - 1
-            level = line['level']
+        for bar in bar_positions:
+            start = bar['start'] - 1  # Start from 0
+            end = bar['end'] - 1  # Start from 0
+            level = bar['level']
 
+            blanks_before = hymn.count_blank_lines(0, start)
+            blanks_up_to_end = hymn.count_blank_lines(0, end)
+
+            # Calculate the bar vertical start and end positions
             y_start = (
-                base_y_start
-                - (start_line * one_line_height
-                   + start_line * space_between_lines)
+                y_padding
+                - (start * one_line
+                   + start * between_lines)
+                - (blanks_before * one_blank_line)
             )
+
             y_end = (
-                base_y_start
-                - (end_line * one_line_height
-                   + end_line * space_between_lines + one_line_height)
+                y_padding
+                - ((end + 1) * one_line
+                   + end * between_lines)
+                - (blanks_up_to_end * one_blank_line)
             )
+            x_position = -(level * x_bars_distance)
 
             elements.append(
-                VerticalLine(-(level * levels_distance), y_start, y_end))
+                VerticalLine(x_position, y_start, y_end))
 
         return elements
 
@@ -424,7 +441,7 @@ class HymnPDFGenerator(Configuration):
             6: 3,
             7: 3,
             8: 2,
-            9: 3,
+            9: 2,
         }
         default_keep_together = 1
 

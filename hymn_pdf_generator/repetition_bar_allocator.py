@@ -1,15 +1,18 @@
 from typing import List, Dict, Tuple
 
-class LevelAllocator:
+class RepetitionBarXAxisAllocator:
     """
-    A class to allocate levels to entries in the format "start-end".
+    A class to allocate the hymn repetition bars in different positions
+    avoiding them to be printed overlapping each other. It determines
+    the X axis for each bar.
 
-    The level means that each number can only allocate one entry.
-    The function will determine the level each entry is allocated based on previous allocations.
+    The function will determine the level (X axis) each entry is
+    allocated based on previous allocations ensuring bars on the same
+    hymn row number will be printed in different levels.
 
     Example:
         s = "1-2,3-4,1-4,2-3,3-5"
-        allocator = LevelAllocator()
+        allocator = RepetitionBarXAxisAllocator()
         levels = allocator.allocate_levels(s)  # Output: [1, 1, 2, 3, 4]
     """
 
